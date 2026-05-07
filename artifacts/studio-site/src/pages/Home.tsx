@@ -213,104 +213,179 @@ export default function Home() {
               </motion.div>
             </div>
 
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative w-full max-w-6xl mx-auto h-[400px] md:h-[600px]"
+              transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative w-full max-w-5xl mx-auto px-6 md:px-10"
             >
-              {/* LARGE gradient showcase container */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1B263B] via-[#415A77] to-[#778DA9] rounded-[2rem] shadow-2xl overflow-hidden border border-[#E0E1DD]/20">
-                {/* CSS-drawn dashboard/UI mockup */}
-                <div className="absolute top-12 left-1/2 -translate-x-1/2 w-[90%] h-[120%] bg-[#F5F5F5] rounded-t-xl shadow-2xl flex flex-col overflow-hidden border border-[#E0E1DD]">
-                  {/* Browser Chrome Bar */}
-                  <div className="h-10 border-b border-[#E0E1DD] flex items-center px-4 gap-2 bg-white">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-[#E0E1DD]"></div>
-                      <div className="w-3 h-3 rounded-full bg-[#E0E1DD]"></div>
-                      <div className="w-3 h-3 rounded-full bg-[#E0E1DD]"></div>
-                    </div>
-                    <div className="ml-4 flex-1 max-w-sm h-6 bg-[#F5F5F5] rounded-md border border-[#E0E1DD]/50"></div>
+              {/* ── Browser window mockup ── */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#E0E1DD] bg-white">
+
+                {/* Browser chrome */}
+                <div className="flex items-center gap-3 px-4 h-10 bg-[#F0F0EE] border-b border-[#E0E1DD]">
+                  <div className="flex gap-1.5 flex-shrink-0">
+                    <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
+                    <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
+                    <div className="w-3 h-3 rounded-full bg-[#28C840]" />
                   </div>
-                  {/* Simple Website Layout */}
-                  <div className="flex-1 p-6 md:p-8 flex flex-col gap-6">
-                    {/* Nav */}
-                    <div className="flex justify-between items-center">
-                      <div className="w-24 h-6 bg-[#1B263B]/20 rounded"></div>
-                      <div className="hidden md:flex gap-4">
-                        <div className="w-16 h-4 bg-[#778DA9]/20 rounded"></div>
-                        <div className="w-16 h-4 bg-[#778DA9]/20 rounded"></div>
-                        <div className="w-16 h-4 bg-[#778DA9]/20 rounded"></div>
-                      </div>
-                    </div>
-                    {/* Hero Area */}
-                    <div className="h-48 md:h-64 rounded-xl bg-gradient-to-r from-[#F5F5F5] to-[#E0E1DD] border border-[#E0E1DD] flex items-center p-8 relative overflow-hidden">
-                      <div className="w-full max-w-md space-y-4">
-                        <div className="w-3/4 h-8 bg-[#0D1B2A]/20 rounded-md"></div>
-                        <div className="w-1/2 h-8 bg-[#0D1B2A]/20 rounded-md"></div>
-                        <div className="w-full h-4 bg-[#778DA9]/20 rounded mt-6"></div>
-                        <div className="w-5/6 h-4 bg-[#778DA9]/20 rounded"></div>
-                        <div className="w-32 h-10 bg-[#415A77]/20 rounded mt-4"></div>
-                      </div>
-                      <div className="absolute right-8 top-8 bottom-8 w-64 bg-white/50 rounded-lg border border-[#E0E1DD] hidden lg:block"></div>
-                    </div>
-                    {/* Content Blocks */}
-                    <div className="grid grid-cols-3 gap-6">
-                      <div className="h-32 rounded-xl bg-white border border-[#E0E1DD]"></div>
-                      <div className="h-32 rounded-xl bg-white border border-[#E0E1DD]"></div>
-                      <div className="h-32 rounded-xl bg-white border border-[#E0E1DD]"></div>
-                    </div>
+                  <div className="flex-1 mx-2 h-5 bg-white rounded border border-[#E0E1DD] flex items-center px-3 gap-1.5 max-w-xs">
+                    <div className="w-2.5 h-2.5 rounded-full border border-[#778DA9]/40 flex-shrink-0" />
+                    <span className="text-[9px] text-[#778DA9] font-medium truncate">pixelstudio.de/restaurant-demo</span>
                   </div>
                 </div>
 
-                {/* Floating "social media post" card */}
-                <motion.div 
-                  animate={{ y: [0, -15, 0] }}
-                  transition={{ repeat: Infinity, duration: 6, ease: "easeInOut" }}
-                  className="absolute right-[5%] md:right-[15%] top-1/4 w-48 md:w-64 bg-white rounded-xl shadow-xl border border-[#E0E1DD] overflow-hidden hidden sm:block z-20"
-                >
-                  <div className="h-32 md:h-40 bg-gradient-to-br from-[#415A77] to-[#778DA9]"></div>
-                  <div className="p-4 space-y-3">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-[#E0E1DD]"></div>
-                      <div className="space-y-1">
-                        <div className="w-20 h-3 bg-[#0D1B2A]/20 rounded"></div>
-                        <div className="w-12 h-2 bg-[#778DA9]/20 rounded"></div>
+                {/* ── Simulated website inside the browser ── */}
+                <div className="flex flex-col select-none">
+
+                  {/* Website Navbar */}
+                  <div className="h-9 bg-[#0D1B2A] flex items-center px-5 gap-4">
+                    <div className="w-16 h-2.5 bg-white/30 rounded-full" />
+                    <div className="flex gap-3 ml-auto">
+                      <div className="w-8 h-1.5 bg-white/20 rounded-full" />
+                      <div className="w-8 h-1.5 bg-white/20 rounded-full" />
+                      <div className="w-8 h-1.5 bg-white/20 rounded-full" />
+                    </div>
+                    <div className="w-14 h-5 bg-[#415A77] rounded flex items-center justify-center">
+                      <div className="w-8 h-1.5 bg-white/80 rounded-full" />
+                    </div>
+                  </div>
+
+                  {/* Website Hero — rich gradient */}
+                  <div className="bg-gradient-to-br from-[#1B263B] via-[#415A77] to-[#778DA9] px-6 md:px-10 py-7 flex items-center gap-8">
+                    <div className="flex-1 space-y-2.5">
+                      <div className="w-24 h-3 bg-[#778DA9]/50 rounded-full" />
+                      <div className="w-4/5 h-5 bg-white/80 rounded-md" />
+                      <div className="w-3/5 h-5 bg-white/50 rounded-md" />
+                      <div className="space-y-1.5 pt-1">
+                        <div className="w-full h-2 bg-white/15 rounded-full" />
+                        <div className="w-5/6 h-2 bg-white/15 rounded-full" />
+                      </div>
+                      <div className="flex gap-2.5 pt-2">
+                        <div className="w-20 h-7 bg-white rounded-md" />
+                        <div className="w-20 h-7 border border-white/40 rounded-md" />
                       </div>
                     </div>
-                    <div className="w-full h-2 bg-[#778DA9]/20 rounded"></div>
-                    <div className="w-4/5 h-2 bg-[#778DA9]/20 rounded"></div>
-                    <div className="w-full h-2 bg-[#778DA9]/20 rounded"></div>
+                    {/* Right image block */}
+                    <div className="hidden sm:block w-32 md:w-44 h-24 md:h-32 bg-white/10 rounded-xl border border-white/20 flex-shrink-0 relative overflow-hidden">
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
+                      <div className="absolute bottom-3 left-3 right-3 space-y-1.5">
+                        <div className="w-3/4 h-2 bg-white/30 rounded-full" />
+                        <div className="w-1/2 h-2 bg-white/20 rounded-full" />
+                      </div>
+                    </div>
                   </div>
-                </motion.div>
+
+                  {/* Website content area */}
+                  <div className="bg-[#F5F5F5] px-6 md:px-10 py-5 grid grid-cols-3 gap-4">
+                    <div className="col-span-2 space-y-3">
+                      <div className="w-1/3 h-3 bg-[#0D1B2A]/25 rounded-full" />
+                      <div className="w-full h-2 bg-[#E0E1DD] rounded-full" />
+                      <div className="w-5/6 h-2 bg-[#E0E1DD] rounded-full" />
+                      <div className="w-4/6 h-2 bg-[#E0E1DD] rounded-full" />
+                      <div className="flex gap-3 pt-1">
+                        <div className="h-14 flex-1 bg-white rounded-xl border border-[#E0E1DD]" />
+                        <div className="h-14 flex-1 bg-white rounded-xl border border-[#E0E1DD]" />
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="h-20 rounded-xl bg-gradient-to-br from-[#415A77]/20 to-[#778DA9]/10 border border-[#E0E1DD]" />
+                      <div className="h-6 w-full bg-[#0D1B2A] rounded-lg" />
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Floating Stat Badges */}
-              <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute top-10 left-4 md:-left-6 bg-white border border-[#E0E1DD] shadow-lg rounded-xl p-3 md:p-4 flex items-center gap-3 z-30"
+              {/* ── Floating phone mockup (bottom-right) ── */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                className="absolute -bottom-6 right-0 md:-right-4 w-24 md:w-32 bg-[#0D1B2A] rounded-[1.4rem] border-4 border-[#0D1B2A] shadow-2xl overflow-hidden hidden sm:block z-20"
               >
-                <div className="w-10 h-10 rounded-full bg-[#415A77]/10 flex items-center justify-center text-[#415A77]">
-                  <Smartphone className="h-5 w-5" />
+                {/* Phone notch */}
+                <div className="h-4 bg-[#0D1B2A] flex items-center justify-center">
+                  <div className="w-8 h-1.5 bg-[#1B263B] rounded-full" />
                 </div>
-                <div>
-                  <span className="block font-bold text-[#0D1B2A] text-sm md:text-base leading-tight">Mobile First</span>
-                  <span className="block text-xs text-[#778DA9]">Responsive Design</span>
+                {/* Phone screen */}
+                <div className="bg-white rounded-b-[1rem] overflow-hidden">
+                  <div className="h-6 bg-[#1B263B] flex items-center px-2 gap-1">
+                    <div className="w-6 h-1.5 bg-white/40 rounded-full" />
+                  </div>
+                  <div className="p-2 space-y-1.5 bg-[#F5F5F5]">
+                    <div className="h-12 rounded-lg bg-gradient-to-br from-[#415A77] to-[#778DA9]" />
+                    <div className="w-3/4 h-1.5 bg-[#E0E1DD] rounded-full" />
+                    <div className="w-1/2 h-1.5 bg-[#E0E1DD] rounded-full" />
+                    <div className="grid grid-cols-2 gap-1 pt-1">
+                      <div className="h-8 rounded-md bg-white border border-[#E0E1DD]" />
+                      <div className="h-8 rounded-md bg-white border border-[#E0E1DD]" />
+                    </div>
+                  </div>
                 </div>
               </motion.div>
 
-              <motion.div 
-                animate={{ y: [0, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-20 -right-4 md:-right-8 bg-white border border-[#E0E1DD] shadow-lg rounded-xl p-3 md:p-4 flex items-center gap-3 z-30"
+              {/* ── Floating accent cards ── */}
+
+              {/* Top-left: Responsive badge */}
+              <motion.div
+                animate={{ y: [0, -7, 0] }}
+                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
+                className="absolute -top-4 -left-2 md:-left-8 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl px-4 py-3 flex items-center gap-3 z-30"
               >
-                <div className="w-10 h-10 rounded-full bg-[#1B263B]/10 flex items-center justify-center text-[#1B263B]">
-                  <TrendingUp className="h-5 w-5" />
+                <div className="w-9 h-9 rounded-xl bg-[#415A77]/10 flex items-center justify-center text-[#415A77] flex-shrink-0">
+                  <Smartphone className="h-4 w-4" />
                 </div>
                 <div>
-                  <span className="block font-bold text-[#0D1B2A] text-sm md:text-base leading-tight">SEO Optimized</span>
-                  <span className="block text-xs text-[#778DA9]">Built for growth</span>
+                  <p className="text-xs font-bold text-[#0D1B2A] leading-none mb-0.5">Mobile Ready</p>
+                  <p className="text-[10px] text-[#778DA9]">All screen sizes</p>
+                </div>
+              </motion.div>
+
+              {/* Bottom-left: Star rating */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-4 left-2 md:-left-4 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl px-4 py-3 z-30"
+              >
+                <div className="flex items-center gap-1 mb-1">
+                  {[1,2,3,4,5].map(i => (
+                    <svg key={i} className="w-3 h-3 text-[#FEBC2E] fill-[#FEBC2E]" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  ))}
+                </div>
+                <p className="text-[10px] font-semibold text-[#0D1B2A]">5.0 Client Rating</p>
+                <p className="text-[9px] text-[#778DA9]">Based in Germany</p>
+              </motion.div>
+
+              {/* Top-right: Social post preview */}
+              <motion.div
+                animate={{ y: [0, -9, 0] }}
+                transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.5 }}
+                className="absolute -top-5 right-10 md:right-6 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl overflow-hidden w-32 z-30 hidden md:block"
+              >
+                <div className="h-16 bg-gradient-to-br from-[#415A77] to-[#778DA9] relative">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                      <Layout className="h-4 w-4 text-white" />
+                    </div>
+                  </div>
+                </div>
+                <div className="p-2.5 space-y-1">
+                  <div className="w-3/4 h-1.5 bg-[#0D1B2A]/20 rounded-full" />
+                  <div className="w-1/2 h-1.5 bg-[#E0E1DD] rounded-full" />
+                </div>
+              </motion.div>
+
+              {/* Right-side: Growth indicator */}
+              <motion.div
+                animate={{ y: [0, 9, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.5 }}
+                className="absolute top-1/3 -right-3 md:-right-10 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl px-3 py-2.5 flex items-center gap-2 z-30 hidden md:flex"
+              >
+                <div className="w-8 h-8 rounded-xl bg-[#1B263B]/10 flex items-center justify-center text-[#1B263B] flex-shrink-0">
+                  <TrendingUp className="h-4 w-4" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold text-[#0D1B2A] leading-none mb-0.5">+120% Traffic</p>
+                  <p className="text-[9px] text-[#778DA9]">After launch</p>
                 </div>
               </motion.div>
             </motion.div>

@@ -1,24 +1,33 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Menu, ArrowRight, CheckCircle2, Check, ExternalLink, 
+  Menu, X, ArrowRight, CheckCircle2, Check, ExternalLink, 
   Shield, TrendingUp, Smartphone, MessageSquare, 
   Utensils, Scissors, Stethoscope, ShoppingBag, MapPin, Building,
   Layout, Rocket
 } from 'lucide-react';
 import NetworkBackground from '@/components/hero/NetworkBackground';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 
 export default function Home() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    setMobileOpen(false);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }, 200);
   };
 
   const navLinks = [
@@ -27,61 +36,142 @@ export default function Home() {
     { name: 'Work', id: 'work' },
     { name: 'Pricing', id: 'pricing' },
     { name: 'Process', id: 'process' },
+    { name: 'Contact', id: 'contact' },
   ];
 
   return (
     <div className="min-h-screen bg-[#F5F5F5] text-[#0D1B2A] font-sans">
       {/* 1. Navbar */}
-      <header className="sticky top-0 z-50 w-full border-b border-[#E0E1DD] bg-[#F5F5F5]/95 backdrop-blur supports-[backdrop-filter]:bg-[#F5F5F5]/60 shadow-sm transition-all duration-300">
-        <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2 font-bold text-xl text-[#0D1B2A] tracking-tight cursor-pointer" onClick={() => scrollTo('home')}>
-            <div className="w-8 h-8 rounded bg-[#1B263B] text-[#F5F5F5] flex items-center justify-center">
+      <header
+        className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+          scrolled
+            ? 'bg-[#F5F5F5]/95 backdrop-blur shadow-sm border-b border-[#E0E1DD]'
+            : 'bg-[#F5F5F5]/80 backdrop-blur border-b border-transparent'
+        }`}
+      >
+        {/* Desktop bar */}
+        <div className="container mx-auto px-6 h-16 hidden md:grid md:grid-cols-3 items-center">
+          {/* Logo — left */}
+          <button
+            onClick={() => scrollTo('home')}
+            className="flex items-center gap-2.5 font-bold text-lg text-[#0D1B2A] tracking-tight w-fit"
+            data-testid="logo-desktop"
+          >
+            <div className="w-8 h-8 rounded-lg bg-[#0D1B2A] text-[#F5F5F5] flex items-center justify-center font-bold text-sm">
               P
             </div>
             PixelStudio
-          </div>
-          
-          <nav className="hidden md:flex items-center gap-6">
+          </button>
+
+          {/* Nav links — center */}
+          <nav className="flex items-center justify-center gap-1">
             {navLinks.map((link) => (
-              <button 
+              <button
                 key={link.name}
                 onClick={() => scrollTo(link.id)}
-                className="text-sm font-medium text-[#415A77] transition-colors hover:text-[#0D1B2A]"
+                data-testid={`nav-${link.id}`}
+                className="px-3 py-1.5 text-sm font-medium text-[#415A77] rounded-md transition-all duration-150 hover:text-[#0D1B2A] hover:bg-[#E0E1DD]/60"
               >
                 {link.name}
               </button>
             ))}
-            <Button onClick={() => scrollTo('contact')} className="bg-[#0D1B2A] text-[#F5F5F5] hover:bg-[#0D1B2A]/90 ml-4">
-              Let's Talk
-            </Button>
           </nav>
 
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-              <nav className="flex flex-col gap-4 mt-8">
-                {navLinks.map((link) => (
-                  <button 
+          {/* CTA — right */}
+          <div className="flex justify-end">
+            <Button
+              onClick={() => scrollTo('contact')}
+              data-testid="button-letstalk-desktop"
+              className="bg-[#0D1B2A] text-[#F5F5F5] hover:bg-[#1B263B] rounded-lg px-5 h-9 text-sm font-semibold shadow-sm"
+            >
+              Let's Talk
+            </Button>
+          </div>
+        </div>
+
+        {/* Mobile bar */}
+        <div className="md:hidden flex items-center justify-between px-4 h-14">
+          <button
+            onClick={() => scrollTo('home')}
+            className="flex items-center gap-2 font-bold text-base text-[#0D1B2A]"
+            data-testid="logo-mobile"
+          >
+            <div className="w-7 h-7 rounded-md bg-[#0D1B2A] text-[#F5F5F5] flex items-center justify-center text-xs font-bold">
+              P
+            </div>
+            PixelStudio
+          </button>
+
+          <button
+            onClick={() => setMobileOpen((v) => !v)}
+            data-testid="button-mobile-menu"
+            className="w-9 h-9 flex items-center justify-center rounded-lg text-[#0D1B2A] hover:bg-[#E0E1DD]/70 transition-colors"
+            aria-label="Toggle menu"
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              {mobileOpen ? (
+                <motion.span
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <X className="h-5 w-5" />
+                </motion.span>
+              ) : (
+                <motion.span
+                  key="open"
+                  initial={{ rotate: 90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: -90, opacity: 0 }}
+                  transition={{ duration: 0.15 }}
+                >
+                  <Menu className="h-5 w-5" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </button>
+        </div>
+
+        {/* Mobile dropdown — top to bottom */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              key="mobile-menu"
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+              className="md:hidden overflow-hidden border-t border-[#E0E1DD] bg-[#F5F5F5]"
+            >
+              <nav className="px-4 pt-3 pb-5 flex flex-col gap-1">
+                {navLinks.map((link, i) => (
+                  <motion.button
                     key={link.name}
+                    initial={{ opacity: 0, x: -8 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.04, duration: 0.18 }}
                     onClick={() => scrollTo(link.id)}
-                    className="text-lg font-medium text-left text-[#415A77] transition-colors hover:text-[#0D1B2A] py-2"
+                    data-testid={`nav-mobile-${link.id}`}
+                    className="w-full text-left px-3 py-3 text-base font-medium text-[#415A77] rounded-lg hover:text-[#0D1B2A] hover:bg-[#E0E1DD]/60 transition-colors"
                   >
                     {link.name}
-                  </button>
+                  </motion.button>
                 ))}
-                <Separator className="my-4" />
-                <Button onClick={() => scrollTo('contact')} className="w-full bg-[#0D1B2A] text-[#F5F5F5]">
-                  Let's Talk
-                </Button>
+                <div className="mt-3 pt-3 border-t border-[#E0E1DD]">
+                  <Button
+                    onClick={() => scrollTo('contact')}
+                    data-testid="button-letstalk-mobile"
+                    className="w-full bg-[#0D1B2A] text-[#F5F5F5] hover:bg-[#1B263B] h-11 text-sm font-semibold rounded-lg"
+                  >
+                    Let's Talk
+                  </Button>
+                </div>
               </nav>
-            </SheetContent>
-          </Sheet>
-        </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       <main>

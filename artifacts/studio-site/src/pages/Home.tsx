@@ -7,6 +7,7 @@ import {
   Layout, Rocket
 } from 'lucide-react';
 import NetworkBackground from '@/components/hero/NetworkBackground';
+import SocialCarousel from '@/components/SocialCarousel';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -684,6 +685,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* 6b. Social Media Showcase */}
+        <SocialCarousel onViewMore={() => scrollTo('work')} />
 
         {/* 7. Process Section (Horizontal Timeline) */}
         <section id="process" className="py-24 bg-[#F5F5F5]">

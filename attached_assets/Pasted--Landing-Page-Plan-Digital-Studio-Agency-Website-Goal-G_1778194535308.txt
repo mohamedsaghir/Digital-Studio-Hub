@@ -1,0 +1,525 @@
+# Landing Page Plan
+## Digital Studio / Agency Website
+### Goal: Get Clients & Grow The Business
+
+---
+
+# Brand Direction
+
+## Positioning
+
+A modern digital studio helping businesses build a professional online presence through:
+- Websites
+- Social Media Posts 
+---
+
+# Main Goal Of The Website
+
+The website should:
+- Build trust
+- Look premium
+- Explain services clearly
+- Convert visitors into clients
+- Showcase professionalism
+- Position the brand as modern and reliable
+
+---
+
+# Website Style Direction
+
+The website should feel:
+- Premium
+- Modern
+- Minimal
+- Business-focused
+- Professional
+- Calm
+- Clean
+
+Avoid:
+- Overloaded layouts
+- Too many animations
+- Gamer/cyberpunk styles
+- Overly technical presentation
+
+---
+
+# Brand Colors
+
+Use ONLY these colors:
+
+- #0D1B2A
+- #1B263B
+- #415A77
+- #778DA9
+- #E0E1DD
+- #F5F5F5
+
+---
+
+# Typography
+
+## English & German 
+ 
+
+---
+
+# Landing Page Structure
+
+---
+
+# 1. Navbar
+
+## Left Side
+- Logo
+- Brand Name
+
+## Right Side
+- Home
+- Services
+- Work
+- Pricing
+- Process
+- Contact
+
+## CTA Button
+### Let’s Talk
+
+---
+
+# 2. Hero Section
+
+## Small Tag
+Modern Websites & Digital Presence
+
+---
+
+# Main Headline
+# Helping Businesses Build
+# A Strong Online Presence
+
+---
+
+## Subheadline
+We create modern websites and professional social media content that help businesses look trustworthy, attract more customers, and grow online.
+
+---
+
+## CTA Buttons
+- View Work
+- Start a Project
+
+---
+
+## Small Trust Text
+Based in Germany • Modern Design • Business-Focused Approach
+
+---
+
+## Hero Visual Direction
+
+The visual should include(Real switcher) 
+- Mobile responsive screens
+- Social media post previews
+- Floating UI cards
+
+---
+
+## Floating Cards Ideas
+- Responsive Design
+- Modern Branding
+- Social Media Content
+- Fast & Professional
+
+---
+
+# 3. Services Section
+
+## Small Tag
+Services
+
+---
+
+# Headline
+# What We Do
+
+---
+
+## Subheadline
+Simple, modern, and business-focused digital solutions for growing brands.
+
+---
+
+# Service 1 — Website Development
+
+## Description
+Modern responsive websites designed to help businesses build trust, improve visibility, and convert visitors into customers.
+
+---
+
+## Features
+- Responsive Design
+- Landing Pages
+- Business Websites
+- SEO Basics
+- Contact Forms
+- Booking Systems
+- Fast Performance
+
+---
+
+# Service 2 — Social Media Content
+
+## Description
+Professional social media visuals and content that keep your brand consistent and visually strong across platforms.
+
+---
+
+## Features
+- Post Design
+- Story Design
+- Branding Consistency
+- Professional Visuals
+- Content Support
+
+---
+
+# 4. Why Choose Us Section
+
+## Small Tag
+Why Us
+
+---
+
+# Headline
+# Modern Design With
+# A Business Mindset
+
+---
+
+# Cards
+
+## Professional Look
+Build trust with clean and premium digital presence.
+
+---
+
+## Business Focused
+We focus on helping businesses grow, not just creating visuals.
+
+---
+
+## Responsive Experience
+Websites optimized for desktop, tablet, and mobile devices.
+
+---
+
+## Clear Communication
+Simple process, fast communication, and reliable delivery.
+
+---
+
+# 5. Portfolio Section
+
+## Small Tag
+Selected Work
+
+---
+
+# Headline
+# Recent Projects
+
+---
+
+## Subheadline
+A selection of modern website and branding concepts created for businesses.
+
+---
+
+# Example Projects
+- Barber Website
+- Restaurant Landing Page
+- Medical Clinic Website
+- Social Media Branding
+
+---
+
+## CTA
+### View All Projects
+
+---
+
+# 6. Pricing Section
+
+## Small Tag
+Pricing
+
+---
+
+# Headline
+# Flexible Solutions
+# For Growing Businesses
+
+---
+
+## Subheadline
+Transparent pricing designed for businesses that want a professional online presence without unnecessary complexity.
+
+---
+
+# Pricing Cards
+
+---
+
+# Starter Website
+
+## Best For
+Small businesses & personal brands
+
+---
+
+## Price
+Starting from €499
+
+---
+
+## Includes
+- Modern Landing Page
+- Mobile Responsive Design
+- Contact Form
+- Basic SEO
+- WhatsApp Integration
+- Fast Performance
+
+---
+
+## CTA
+### Get Started
+
+---
+
+# Business Website
+
+## Best For
+Growing businesses
+
+---
+
+## Price
+Starting from €999
+
+---
+
+## Includes
+- Multi-Page Website
+- Premium UI Design
+- Mobile Responsive
+- SEO Basics
+- Booking / Contact System
+- Google Maps Integration
+- Social Media Integration
+
+---
+
+## CTA
+### Start Your Project
+
+---
+
+# Website + Content Package
+
+## Best For
+Businesses that want a complete digital presence
+
+---
+
+## Price
+Custom Pricing
+
+---
+
+## Includes
+- Website Design & Development
+- Social Media Post Design
+- Story Design
+- Branding Consistency
+- Content Support
+
+---
+
+## CTA
+### Contact Us
+
+---
+
+# 7. Installment Section
+
+## Small Tag
+Flexible Payment Options
+
+---
+
+# Headline
+# Professional Digital Solutions
+# With Flexible Payments
+
+---
+
+## Subheadline
+We offer installment options for selected projects to help businesses launch professionally without large upfront costs.
+
+---
+
+# Payment Options
+
+## 2 Payments
+50% before project start
+50% after completion
+
+---
+
+## Monthly Installments
+Available for selected projects and larger packages.
+
+---
+
+## Ongoing Support
+Optional monthly support for updates, content, and maintenance.
+
+---
+
+# 8. Process Section
+
+## Small Tag
+Process
+
+---
+
+# Headline
+# Simple & Clear Process
+
+---
+
+# Step 1 — Discovery
+Understanding your business, goals, and audience.
+
+---
+
+# Step 2 — Design
+Creating a modern and professional visual direction.
+
+---
+
+# Step 3 — Development
+Building a responsive and high-quality digital experience.
+
+---
+
+# Step 4 — Launch
+Delivering and helping your business go live confidently.
+
+---
+
+# 9. Final CTA Section
+
+# Headline
+# Let’s Build
+# Your Digital Presence
+
+---
+
+## Subheadline
+Whether you need a modern website or professional social media content, we help your business look professional online.
+
+---
+
+## CTA Buttons
+- Start a Project
+- Contact Us
+
+---
+
+# 10. Footer
+
+## Left Side
+- Logo
+- Brand Name
+
+---
+
+## Short Description
+Modern websites and digital content for businesses that want to grow online.
+
+---
+
+## Navigation Links
+- Home
+- Services
+- Work
+- Pricing
+- Contact
+
+---
+
+## Contact Information
+- Email
+- LinkedIn
+- Instagram
+- Location: Germany
+
+---
+
+## Bottom Line
+© 2026 Your Brand Name. All rights reserved.
+
+---
+
+# Technical Recommendations
+
+## Stack
+- Next.js
+- Tailwind CSS
+- Framer Motion
+- TypeScript
+
+---
+
+# Animation Direction
+
+Use:
+- Smooth transitions
+- Subtle hover effects
+- Clean motion
+
+Avoid:
+- Heavy motion
+- Complex animations
+- Visual overload
+
+---
+
+# Important Branding Principles
+
+The website should communicate:
+- Trust
+- Professionalism
+- Modern quality
+- Business understanding
+
+NOT:
+- Technical complexity
+- Developer-focused messaging
+
+---
+
+# Main Website Goal
+
+The visitor should quickly understand:
+- What the company does
+- Who the company helps
+- Why the company is trustworthy
+- How to contact/start a project
+
+Within the first 5 seconds.
+
+---

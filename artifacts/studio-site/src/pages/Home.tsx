@@ -617,7 +617,7 @@ export default function Home() {
         </section>
 
         {/* 5. "Super Power" Statement Section (Why Choose Us) */}
-        <section className="py-24 bg-[#E0E1DD]">
+        <section className="py-24 bg-[#0D1B2A]">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
               <motion.div 
@@ -625,8 +625,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0D1B2A] leading-[1.1] tracking-tight">
-                  Modern Design<br/>With A Business<br/>Mindset.
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
+                  Modern Design<br/>With A Business<br/>
+                  <span className="text-[#778DA9]">Mindset.</span>
                 </h2>
               </motion.div>
               
@@ -645,11 +646,11 @@ export default function Home() {
                     transition={{ delay: i * 0.1 }}
                     className="flex flex-col"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-[#415A77] mb-4 shadow-sm">
+                    <div className="w-12 h-12 rounded-xl bg-[#1B263B] border border-white/10 flex items-center justify-center text-[#778DA9] mb-4">
                       <item.icon className="h-6 w-6" />
                     </div>
-                    <h3 className="text-xl font-bold text-[#0D1B2A] mb-2">{item.title}</h3>
-                    <p className="text-[#415A77] text-sm leading-relaxed">{item.desc}</p>
+                    <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
+                    <p className="text-[#778DA9] text-sm leading-relaxed">{item.desc}</p>
                   </motion.div>
                 ))}
               </div>

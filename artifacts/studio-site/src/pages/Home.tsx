@@ -724,10 +724,33 @@ export default function Home() {
 
             <div className="columns-1 md:columns-2 gap-8 max-w-6xl mx-auto space-y-8">
               {[
-                { title: 'Barber Website', desc: 'Modern landing page with integrated booking system.', category: 'Website', color: 'from-[#1B263B] to-[#415A77]', height: 'h-72' },
-                { title: 'Restaurant Landing Page', desc: 'Appetizing visual design showcasing menu and location.', category: 'Website', color: 'from-[#415A77] to-[#778DA9]', height: 'h-96' },
-                { title: 'Medical Clinic Website', desc: 'Trust-building professional layout with patient forms.', category: 'Website', color: 'from-[#778DA9] to-[#E0E1DD]', height: 'h-80' },
-                { title: 'Social Media Branding Pack', desc: 'Cohesive visual templates for Instagram and Facebook.', category: 'Branding', color: 'from-[#0D1B2A] to-[#1B263B]', height: 'h-72' }
+                {
+                  title: 'The King Kam',
+                  desc: 'High-impact car detailing website with bold visual identity, WhatsApp booking integration, and a strong German-market presence.',
+                  category: 'Website',
+                  url: 'https://www.thekingkam.de/',
+                  image: '/work-kingkam.png',
+                  height: 'h-72',
+                  tag: 'Auto Detailing · Bad Pyrmont'
+                },
+                {
+                  title: 'Iqraa Cloud',
+                  desc: "Syria's first digital library platform — a full Arabic e-commerce experience with 10,000+ books, user accounts, and a clean RTL storefront.",
+                  category: 'Web App',
+                  url: 'https://iqraa.cloud/',
+                  image: '/work-iqraa.png',
+                  height: 'h-96',
+                  tag: 'E-Library · Arabic Platform'
+                },
+                {
+                  title: 'Ahmad Saghir',
+                  desc: 'Sleek developer portfolio showcasing skills, projects, and client reviews — built for maximum credibility and conversion.',
+                  category: 'Portfolio',
+                  url: 'https://ahmadsaghir.de/',
+                  image: '/work-ahmad.png',
+                  height: 'h-80',
+                  tag: 'Portfolio · Web Developer'
+                },
               ].map((project, i) => (
                 <motion.div
                   key={project.title}
@@ -738,32 +761,34 @@ export default function Home() {
                   whileHover={{ y: -8, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
                   className="group cursor-pointer break-inside-avoid"
                 >
-                  <Card className="card-glow overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-2xl hover:shadow-[#415A77]/10 transition-shadow duration-500 rounded-2xl flex flex-col">
-                    <div className={`${project.height} w-full bg-gradient-to-br ${project.color} relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-700`}>
-                      <div className="absolute inset-0 bg-[#0D1B2A]/5 mix-blend-overlay" />
-                      <div className="absolute inset-4 md:inset-8 border border-white/20 rounded-xl overflow-hidden flex flex-col backdrop-blur-sm bg-white/5">
-                        <div className="h-8 border-b border-white/20 flex items-center px-4">
-                          <div className="w-12 h-2 bg-white/30 rounded-full" />
-                        </div>
-                        <div className="flex-1 p-4 md:p-6 space-y-4">
-                          <div className="w-3/4 h-6 bg-white/20 rounded-md" />
-                          <div className="w-1/2 h-4 bg-white/10 rounded-md" />
-                          <div className="mt-8 grid grid-cols-2 gap-4">
-                            <div className="h-20 bg-white/10 rounded-lg" />
-                            <div className="h-20 bg-white/10 rounded-lg" />
+                  <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
+                    <Card className="card-glow overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-2xl hover:shadow-[#415A77]/10 transition-shadow duration-500 rounded-2xl flex flex-col">
+                      <div className={`${project.height} w-full relative overflow-hidden`}>
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
+                            <ExternalLink className="h-3.5 w-3.5 text-[#0D1B2A]" />
                           </div>
                         </div>
                       </div>
-                    </div>
-                    <CardContent className="p-6 md:p-8">
-                      <Badge variant="secondary" className="mb-4 bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#415A77] dark:text-[#778DA9] hover:bg-[#E0E1DD] font-medium">{project.category}</Badge>
-                      <h3 className="text-xl md:text-2xl font-bold text-[#0D1B2A] dark:text-white mb-3 flex items-center justify-between group-hover:text-[#415A77] transition-colors">
-                        {project.title}
-                        <ExternalLink className="h-5 w-5 text-[#778DA9] opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300" />
-                      </h3>
-                      <p className="text-[#778DA9] leading-relaxed">{project.desc}</p>
-                    </CardContent>
-                  </Card>
+                      <CardContent className="p-6 md:p-8">
+                        <div className="flex items-center gap-2 mb-4">
+                          <Badge variant="secondary" className="bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#415A77] dark:text-[#778DA9] hover:bg-[#E0E1DD] font-medium">{project.category}</Badge>
+                          <span className="text-xs text-[#778DA9]">{project.tag}</span>
+                        </div>
+                        <h3 className="text-xl md:text-2xl font-bold text-[#0D1B2A] dark:text-white mb-3 flex items-center justify-between group-hover:text-[#415A77] transition-colors">
+                          {project.title}
+                          <ExternalLink className="h-5 w-5 text-[#778DA9] opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300 flex-shrink-0" />
+                        </h3>
+                        <p className="text-[#778DA9] leading-relaxed">{project.desc}</p>
+                      </CardContent>
+                    </Card>
+                  </a>
                 </motion.div>
               ))}
             </div>

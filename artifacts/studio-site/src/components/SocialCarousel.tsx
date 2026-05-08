@@ -9,6 +9,8 @@ import img2 from '@assets/image_1778239647603.png';
 import img3 from '@assets/image_1778239654275.png';
 import img4 from '@assets/image_1778239661379.png';
 import img5 from '@assets/image_1778239668987.png';
+import img6 from '@assets/image_1778255320894.png';
+import img7 from '@assets/image_1778257459210.png';
 
 const posts = [
   { id: 1, label: 'Tech Series', title: 'MongoDB vs MySQL', img: img1 },
@@ -16,6 +18,8 @@ const posts = [
   { id: 3, label: 'Database Guide', title: 'When to Use MongoDB', img: img3 },
   { id: 4, label: 'Tech Tip', title: 'Simple Rule', img: img4 },
   { id: 5, label: 'Tech Series', title: 'Choose the Right Database', img: img5 },
+  { id: 6, label: 'The King Kam', title: 'Royal Car Treatment', img: img6 },
+  { id: 7, label: 'Trattoria Joseppe', title: 'Pizza Gemacht für Genussmomente', img: img7 },
 ];
 
 function PostCard({ post, isActive }: { post: typeof posts[0]; isActive: boolean }) {

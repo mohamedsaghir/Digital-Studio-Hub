@@ -488,37 +488,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3b. Stats Bar */}
-        <section className="py-16 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
-          <div className="container mx-auto px-4 md:px-6">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-60px' }}
-              variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
-            >
-              {[
-                { to: 50, suffix: '+', label: 'Happy Clients' },
-                { to: 98, suffix: '%', label: 'Satisfaction Rate' },
-                { to: 2, suffix: ' wks', label: 'Avg Delivery' },
-                { to: 3, suffix: '×', label: 'Avg Traffic Growth' },
-              ].map((stat) => (
-                <motion.div
-                  key={stat.label}
-                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
-                  className="text-center"
-                >
-                  <div className="text-4xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white tracking-tight mb-1">
-                    <AnimatedCounter to={stat.to} suffix={stat.suffix} />
-                  </div>
-                  <div className="w-8 h-0.5 bg-[#415A77]/40 rounded-full mx-auto my-2" />
-                  <p className="text-sm text-[#778DA9] font-medium">{stat.label}</p>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
 
         {/* 4. Services Section */}
         <section id="services" className="py-24 bg-[#F5F5F5] dark:bg-[#0D1B2A]">

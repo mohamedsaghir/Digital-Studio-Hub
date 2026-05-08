@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Menu, X, ArrowRight, CheckCircle2, Check, ExternalLink, 
-  Shield, TrendingUp, Smartphone, MessageSquare, 
+import {
+  Menu, X, ArrowRight, CheckCircle2, Check, ExternalLink,
+  Shield, TrendingUp, Smartphone, MessageSquare,
   Utensils, Scissors, Stethoscope, ShoppingBag, MapPin, Building,
-  Layout, Rocket, Mail, Phone, Instagram, Facebook, Linkedin, Twitter, Send
+  Layout, Rocket, Mail, Phone, Instagram, Facebook, Linkedin, Twitter, Send,
+  Moon, Sun
 } from 'lucide-react';
 import NetworkBackground from '@/components/hero/NetworkBackground';
 import SocialCarousel from '@/components/SocialCarousel';
+import { useTheme } from '@/contexts/theme';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
@@ -51,6 +53,7 @@ function NewsletterForm() {
 }
 
 export default function Home() {
+  const { theme, toggleTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -78,49 +81,54 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] text-[#0D1B2A] font-sans">
+    <div className="min-h-screen bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#0D1B2A] dark:text-[#E0E1DD] font-sans transition-colors duration-300">
+
       {/* 1. Navbar */}
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled
-            ? 'bg-[#F5F5F5]/95 backdrop-blur shadow-sm border-b border-[#E0E1DD]'
-            : 'bg-[#F5F5F5]/80 backdrop-blur border-b border-transparent'
+            ? 'bg-[#F5F5F5]/95 dark:bg-[#0D1B2A]/95 backdrop-blur shadow-sm border-b border-[#E0E1DD] dark:border-white/10'
+            : 'bg-[#F5F5F5]/80 dark:bg-[#0D1B2A]/80 backdrop-blur border-b border-transparent'
         }`}
       >
         {/* Desktop bar */}
         <div className="container mx-auto px-6 h-16 hidden md:grid md:grid-cols-3 items-center">
-          {/* Logo — left */}
+          {/* Logo */}
           <button
             onClick={() => scrollTo('home')}
-            className="flex items-center gap-2.5 font-bold text-lg text-[#0D1B2A] tracking-tight w-fit"
-            data-testid="logo-desktop"
+            className="flex items-center gap-2.5 font-bold text-lg text-[#0D1B2A] dark:text-white tracking-tight w-fit"
           >
-            <div className="w-8 h-8 rounded-lg bg-[#0D1B2A] text-[#F5F5F5] flex items-center justify-center font-bold text-sm">
+            <div className="w-8 h-8 rounded-lg bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] flex items-center justify-center font-bold text-sm">
               P
             </div>
             PixelStudio
           </button>
 
-          {/* Nav links — center */}
+          {/* Nav links */}
           <nav className="flex items-center justify-center gap-1">
             {navLinks.map((link) => (
               <button
                 key={link.name}
                 onClick={() => scrollTo(link.id)}
-                data-testid={`nav-${link.id}`}
-                className="px-3 py-1.5 text-sm font-medium text-[#415A77] rounded-md transition-all duration-150 hover:text-[#0D1B2A] hover:bg-[#E0E1DD]/60"
+                className="px-3 py-1.5 text-sm font-medium text-[#415A77] dark:text-[#778DA9] rounded-md transition-all duration-150 hover:text-[#0D1B2A] dark:hover:text-white hover:bg-[#E0E1DD]/60 dark:hover:bg-white/8"
               >
                 {link.name}
               </button>
             ))}
           </nav>
 
-          {/* CTA — right */}
-          <div className="flex justify-end">
+          {/* CTA + theme toggle */}
+          <div className="flex justify-end items-center gap-2">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+              className="w-9 h-9 flex items-center justify-center rounded-lg text-[#415A77] dark:text-[#778DA9] hover:text-[#0D1B2A] dark:hover:text-white hover:bg-[#E0E1DD]/60 dark:hover:bg-white/8 transition-all duration-150"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
             <Button
               onClick={() => scrollTo('contact')}
-              data-testid="button-letstalk-desktop"
-              className="bg-[#0D1B2A] text-[#F5F5F5] hover:bg-[#1B263B] rounded-lg px-5 h-9 text-sm font-semibold shadow-sm"
+              className="bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] rounded-lg px-5 h-9 text-sm font-semibold shadow-sm"
             >
               Let's Talk
             </Button>
@@ -131,48 +139,43 @@ export default function Home() {
         <div className="md:hidden flex items-center justify-between px-4 h-14">
           <button
             onClick={() => scrollTo('home')}
-            className="flex items-center gap-2 font-bold text-base text-[#0D1B2A]"
-            data-testid="logo-mobile"
+            className="flex items-center gap-2 font-bold text-base text-[#0D1B2A] dark:text-white"
           >
-            <div className="w-7 h-7 rounded-md bg-[#0D1B2A] text-[#F5F5F5] flex items-center justify-center text-xs font-bold">
+            <div className="w-7 h-7 rounded-md bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] flex items-center justify-center text-xs font-bold">
               P
             </div>
             PixelStudio
           </button>
 
-          <button
-            onClick={() => setMobileOpen((v) => !v)}
-            data-testid="button-mobile-menu"
-            className="w-9 h-9 flex items-center justify-center rounded-lg text-[#0D1B2A] hover:bg-[#E0E1DD]/70 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              {mobileOpen ? (
-                <motion.span
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <X className="h-5 w-5" />
-                </motion.span>
-              ) : (
-                <motion.span
-                  key="open"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.15 }}
-                >
-                  <Menu className="h-5 w-5" />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </button>
+          <div className="flex items-center gap-1">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+              className="w-9 h-9 flex items-center justify-center rounded-lg text-[#415A77] dark:text-[#778DA9] hover:bg-[#E0E1DD]/70 dark:hover:bg-white/8 transition-colors"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+            <button
+              onClick={() => setMobileOpen((v) => !v)}
+              className="w-9 h-9 flex items-center justify-center rounded-lg text-[#0D1B2A] dark:text-white hover:bg-[#E0E1DD]/70 dark:hover:bg-white/8 transition-colors"
+              aria-label="Toggle menu"
+            >
+              <AnimatePresence mode="wait" initial={false}>
+                {mobileOpen ? (
+                  <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <X className="h-5 w-5" />
+                  </motion.span>
+                ) : (
+                  <motion.span key="open" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                    <Menu className="h-5 w-5" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
+          </div>
         </div>
 
-        {/* Mobile dropdown — top to bottom */}
+        {/* Mobile dropdown */}
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
@@ -181,7 +184,7 @@ export default function Home() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
-              className="md:hidden overflow-hidden border-t border-[#E0E1DD] bg-[#F5F5F5]"
+              className="md:hidden overflow-hidden border-t border-[#E0E1DD] dark:border-white/10 bg-[#F5F5F5] dark:bg-[#0D1B2A]"
             >
               <nav className="px-4 pt-3 pb-5 flex flex-col gap-1">
                 {navLinks.map((link, i) => (
@@ -191,17 +194,15 @@ export default function Home() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: i * 0.04, duration: 0.18 }}
                     onClick={() => scrollTo(link.id)}
-                    data-testid={`nav-mobile-${link.id}`}
-                    className="w-full text-left px-3 py-3 text-base font-medium text-[#415A77] rounded-lg hover:text-[#0D1B2A] hover:bg-[#E0E1DD]/60 transition-colors"
+                    className="w-full text-left px-3 py-3 text-base font-medium text-[#415A77] dark:text-[#778DA9] rounded-lg hover:text-[#0D1B2A] dark:hover:text-white hover:bg-[#E0E1DD]/60 dark:hover:bg-white/8 transition-colors"
                   >
                     {link.name}
                   </motion.button>
                 ))}
-                <div className="mt-3 pt-3 border-t border-[#E0E1DD]">
+                <div className="mt-3 pt-3 border-t border-[#E0E1DD] dark:border-white/10">
                   <Button
                     onClick={() => scrollTo('contact')}
-                    data-testid="button-letstalk-mobile"
-                    className="w-full bg-[#0D1B2A] text-[#F5F5F5] hover:bg-[#1B263B] h-11 text-sm font-semibold rounded-lg"
+                    className="w-full bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] h-11 text-sm font-semibold rounded-lg"
                   >
                     Let's Talk
                   </Button>
@@ -214,30 +215,30 @@ export default function Home() {
 
       <main>
         {/* 2. Hero Section */}
-        <section id="home" className="relative pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden bg-[#F5F5F5]">
+        <section id="home" className="relative pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden bg-[#F5F5F5] dark:bg-[#0D1B2A]">
           <NetworkBackground />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="flex flex-col mb-10 items-center text-center">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 className="max-w-3xl"
               >
-                <Badge variant="outline" className="mb-6 py-1.5 px-4 bg-[#F5F5F5]/50 backdrop-blur-sm border-[#778DA9]/30 text-[#415A77] font-medium">
+                <Badge variant="outline" className="mb-6 py-1.5 px-4 bg-[#F5F5F5]/50 dark:bg-[#1B263B]/60 backdrop-blur-sm border-[#778DA9]/30 text-[#415A77] dark:text-[#778DA9] font-medium">
                   Modern Websites & Digital Presence
                 </Badge>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#0D1B2A] leading-[1.1] mb-6">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-[#0D1B2A] dark:text-white leading-[1.1] mb-6">
                   Helping Businesses Build A <span className="text-[#415A77]">Strong Online Presence</span>
                 </h1>
-                <p className="text-lg md:text-xl text-[#415A77] mb-8 leading-relaxed max-w-2xl mx-auto">
+                <p className="text-lg md:text-xl text-[#415A77] dark:text-[#778DA9] mb-8 leading-relaxed max-w-2xl mx-auto">
                   We create modern websites and professional social media content that help businesses look trustworthy, attract more customers, and grow online.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-                  <Button onClick={() => scrollTo('work')} variant="outline" size="lg" className="border-[#778DA9]/30 text-[#0D1B2A] hover:bg-[#E0E1DD] font-medium h-12 px-8">
+                  <Button onClick={() => scrollTo('work')} variant="outline" size="lg" className="border-[#778DA9]/30 dark:border-white/20 text-[#0D1B2A] dark:text-white hover:bg-[#E0E1DD] dark:hover:bg-white/10 font-medium h-12 px-8">
                     View Work
                   </Button>
-                  <Button onClick={() => scrollTo('contact')} size="lg" className="bg-[#0D1B2A] text-[#F5F5F5] hover:bg-[#1B263B] font-medium h-12 px-8">
+                  <Button onClick={() => scrollTo('contact')} size="lg" className="bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] font-medium h-12 px-8">
                     Start a Project <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </div>
@@ -257,26 +258,21 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.3 }}
               className="relative w-full max-w-5xl mx-auto px-6 md:px-10"
             >
-              {/* ── Browser window mockup ── */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#E0E1DD] bg-white">
-
-                {/* Browser chrome */}
-                <div className="flex items-center gap-3 px-4 h-10 bg-[#F0F0EE] border-b border-[#E0E1DD]">
+              {/* Browser mockup */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B]">
+                <div className="flex items-center gap-3 px-4 h-10 bg-[#F0F0EE] dark:bg-[#0D1B2A] border-b border-[#E0E1DD] dark:border-white/10">
                   <div className="flex gap-1.5 flex-shrink-0">
                     <div className="w-3 h-3 rounded-full bg-[#FF5F57]" />
                     <div className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
                     <div className="w-3 h-3 rounded-full bg-[#28C840]" />
                   </div>
-                  <div className="flex-1 mx-2 h-5 bg-white rounded border border-[#E0E1DD] flex items-center px-3 gap-1.5 max-w-xs">
+                  <div className="flex-1 mx-2 h-5 bg-white dark:bg-[#1B263B] rounded border border-[#E0E1DD] dark:border-white/10 flex items-center px-3 gap-1.5 max-w-xs">
                     <div className="w-2.5 h-2.5 rounded-full border border-[#778DA9]/40 flex-shrink-0" />
                     <span className="text-[9px] text-[#778DA9] font-medium truncate">pixelstudio.de/restaurant-demo</span>
                   </div>
                 </div>
 
-                {/* ── Simulated website inside the browser ── */}
                 <div className="flex flex-col select-none">
-
-                  {/* Website Navbar */}
                   <div className="h-9 bg-[#0D1B2A] flex items-center px-5 gap-4">
                     <div className="w-16 h-2.5 bg-white/30 rounded-full" />
                     <div className="flex gap-3 ml-auto">
@@ -289,7 +285,6 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Website Hero — rich gradient */}
                   <div className="bg-gradient-to-br from-[#1B263B] via-[#415A77] to-[#778DA9] px-6 md:px-10 py-7 flex items-center gap-8">
                     <div className="flex-1 space-y-2.5">
                       <div className="w-24 h-3 bg-[#778DA9]/50 rounded-full" />
@@ -304,7 +299,6 @@ export default function Home() {
                         <div className="w-20 h-7 border border-white/40 rounded-md" />
                       </div>
                     </div>
-                    {/* Right image block */}
                     <div className="hidden sm:block w-32 md:w-44 h-24 md:h-32 bg-white/10 rounded-xl border border-white/20 flex-shrink-0 relative overflow-hidden">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
                       <div className="absolute bottom-3 left-3 right-3 space-y-1.5">
@@ -314,90 +308,85 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Website content area */}
-                  <div className="bg-[#F5F5F5] px-6 md:px-10 py-5 grid grid-cols-3 gap-4">
+                  <div className="bg-[#F5F5F5] dark:bg-[#0D1B2A] px-6 md:px-10 py-5 grid grid-cols-3 gap-4">
                     <div className="col-span-2 space-y-3">
-                      <div className="w-1/3 h-3 bg-[#0D1B2A]/25 rounded-full" />
-                      <div className="w-full h-2 bg-[#E0E1DD] rounded-full" />
-                      <div className="w-5/6 h-2 bg-[#E0E1DD] rounded-full" />
-                      <div className="w-4/6 h-2 bg-[#E0E1DD] rounded-full" />
+                      <div className="w-1/3 h-3 bg-[#0D1B2A]/25 dark:bg-white/20 rounded-full" />
+                      <div className="w-full h-2 bg-[#E0E1DD] dark:bg-white/10 rounded-full" />
+                      <div className="w-5/6 h-2 bg-[#E0E1DD] dark:bg-white/10 rounded-full" />
+                      <div className="w-4/6 h-2 bg-[#E0E1DD] dark:bg-white/10 rounded-full" />
                       <div className="flex gap-3 pt-1">
-                        <div className="h-14 flex-1 bg-white rounded-xl border border-[#E0E1DD]" />
-                        <div className="h-14 flex-1 bg-white rounded-xl border border-[#E0E1DD]" />
+                        <div className="h-14 flex-1 bg-white dark:bg-[#1B263B] rounded-xl border border-[#E0E1DD] dark:border-white/10" />
+                        <div className="h-14 flex-1 bg-white dark:bg-[#1B263B] rounded-xl border border-[#E0E1DD] dark:border-white/10" />
                       </div>
                     </div>
                     <div className="space-y-3">
-                      <div className="h-20 rounded-xl bg-gradient-to-br from-[#415A77]/20 to-[#778DA9]/10 border border-[#E0E1DD]" />
-                      <div className="h-6 w-full bg-[#0D1B2A] rounded-lg" />
+                      <div className="h-20 rounded-xl bg-gradient-to-br from-[#415A77]/20 to-[#778DA9]/10 border border-[#E0E1DD] dark:border-white/10" />
+                      <div className="h-6 w-full bg-[#0D1B2A] dark:bg-[#415A77] rounded-lg" />
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* ── Floating phone mockup (bottom-right) ── */}
+              {/* Floating phone mockup */}
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
                 className="absolute -bottom-6 right-0 md:-right-4 w-24 md:w-32 bg-[#0D1B2A] rounded-[1.4rem] border-4 border-[#0D1B2A] shadow-2xl overflow-hidden hidden sm:block z-20"
               >
-                {/* Phone notch */}
                 <div className="h-4 bg-[#0D1B2A] flex items-center justify-center">
                   <div className="w-8 h-1.5 bg-[#1B263B] rounded-full" />
                 </div>
-                {/* Phone screen */}
-                <div className="bg-white rounded-b-[1rem] overflow-hidden">
+                <div className="bg-white dark:bg-[#1B263B] rounded-b-[1rem] overflow-hidden">
                   <div className="h-6 bg-[#1B263B] flex items-center px-2 gap-1">
                     <div className="w-6 h-1.5 bg-white/40 rounded-full" />
                   </div>
-                  <div className="p-2 space-y-1.5 bg-[#F5F5F5]">
+                  <div className="p-2 space-y-1.5 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
                     <div className="h-12 rounded-lg bg-gradient-to-br from-[#415A77] to-[#778DA9]" />
-                    <div className="w-3/4 h-1.5 bg-[#E0E1DD] rounded-full" />
-                    <div className="w-1/2 h-1.5 bg-[#E0E1DD] rounded-full" />
+                    <div className="w-3/4 h-1.5 bg-[#E0E1DD] dark:bg-white/15 rounded-full" />
+                    <div className="w-1/2 h-1.5 bg-[#E0E1DD] dark:bg-white/15 rounded-full" />
                     <div className="grid grid-cols-2 gap-1 pt-1">
-                      <div className="h-8 rounded-md bg-white border border-[#E0E1DD]" />
-                      <div className="h-8 rounded-md bg-white border border-[#E0E1DD]" />
+                      <div className="h-8 rounded-md bg-white dark:bg-[#1B263B] border border-[#E0E1DD] dark:border-white/10" />
+                      <div className="h-8 rounded-md bg-white dark:bg-[#1B263B] border border-[#E0E1DD] dark:border-white/10" />
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* ── Floating accent cards ── */}
-
-              {/* Top-left: Responsive badge */}
+              {/* Floating card — Mobile Ready */}
               <motion.div
                 animate={{ y: [0, -7, 0] }}
                 transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-                className="absolute -top-4 -left-2 md:-left-8 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl px-4 py-3 flex items-center gap-3 z-30"
+                className="absolute -top-4 -left-2 md:-left-8 bg-white dark:bg-[#1B263B] border border-[#E0E1DD] dark:border-white/10 shadow-xl rounded-2xl px-4 py-3 flex items-center gap-3 z-30"
               >
-                <div className="w-9 h-9 rounded-xl bg-[#415A77]/10 flex items-center justify-center text-[#415A77] flex-shrink-0">
+                <div className="w-9 h-9 rounded-xl bg-[#415A77]/10 dark:bg-[#415A77]/20 flex items-center justify-center text-[#415A77] flex-shrink-0">
                   <Smartphone className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="text-xs font-bold text-[#0D1B2A] leading-none mb-0.5">Mobile Ready</p>
+                  <p className="text-xs font-bold text-[#0D1B2A] dark:text-white leading-none mb-0.5">Mobile Ready</p>
                   <p className="text-[10px] text-[#778DA9]">All screen sizes</p>
                 </div>
               </motion.div>
 
-              {/* Bottom-left: Star rating */}
+              {/* Floating card — Star rating */}
               <motion.div
                 animate={{ y: [0, 8, 0] }}
                 transition={{ repeat: Infinity, duration: 5.5, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-4 left-2 md:-left-4 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl px-4 py-3 z-30"
+                className="absolute -bottom-4 left-2 md:-left-4 bg-white dark:bg-[#1B263B] border border-[#E0E1DD] dark:border-white/10 shadow-xl rounded-2xl px-4 py-3 z-30"
               >
                 <div className="flex items-center gap-1 mb-1">
                   {[1,2,3,4,5].map(i => (
                     <svg key={i} className="w-3 h-3 text-[#FEBC2E] fill-[#FEBC2E]" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                   ))}
                 </div>
-                <p className="text-[10px] font-semibold text-[#0D1B2A]">5.0 Client Rating</p>
+                <p className="text-[10px] font-semibold text-[#0D1B2A] dark:text-white">5.0 Client Rating</p>
                 <p className="text-[9px] text-[#778DA9]">Based in Germany</p>
               </motion.div>
 
-              {/* Top-right: Social post preview */}
+              {/* Floating card — Social post */}
               <motion.div
                 animate={{ y: [0, -9, 0] }}
                 transition={{ repeat: Infinity, duration: 6, ease: "easeInOut", delay: 0.5 }}
-                className="absolute -top-5 right-10 md:right-6 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl overflow-hidden w-32 z-30 hidden md:block"
+                className="absolute -top-5 right-10 md:right-6 bg-white dark:bg-[#1B263B] border border-[#E0E1DD] dark:border-white/10 shadow-xl rounded-2xl overflow-hidden w-32 z-30 hidden md:block"
               >
                 <div className="h-16 bg-gradient-to-br from-[#415A77] to-[#778DA9] relative">
                   <div className="absolute inset-0 flex items-center justify-center">
@@ -407,22 +396,22 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="p-2.5 space-y-1">
-                  <div className="w-3/4 h-1.5 bg-[#0D1B2A]/20 rounded-full" />
-                  <div className="w-1/2 h-1.5 bg-[#E0E1DD] rounded-full" />
+                  <div className="w-3/4 h-1.5 bg-[#0D1B2A]/20 dark:bg-white/20 rounded-full" />
+                  <div className="w-1/2 h-1.5 bg-[#E0E1DD] dark:bg-white/10 rounded-full" />
                 </div>
               </motion.div>
 
-              {/* Right-side: Growth indicator */}
+              {/* Floating card — Growth */}
               <motion.div
                 animate={{ y: [0, 9, 0] }}
                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut", delay: 1.5 }}
-                className="absolute top-1/3 -right-3 md:-right-10 bg-white border border-[#E0E1DD] shadow-xl rounded-2xl px-3 py-2.5 flex items-center gap-2 z-30 hidden md:flex"
+                className="absolute top-1/3 -right-3 md:-right-10 bg-white dark:bg-[#1B263B] border border-[#E0E1DD] dark:border-white/10 shadow-xl rounded-2xl px-3 py-2.5 flex items-center gap-2 z-30 hidden md:flex"
               >
-                <div className="w-8 h-8 rounded-xl bg-[#1B263B]/10 flex items-center justify-center text-[#1B263B] flex-shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-[#1B263B]/10 dark:bg-white/10 flex items-center justify-center text-[#1B263B] dark:text-[#778DA9] flex-shrink-0">
                   <TrendingUp className="h-4 w-4" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-[#0D1B2A] leading-none mb-0.5">+120% Traffic</p>
+                  <p className="text-[10px] font-bold text-[#0D1B2A] dark:text-white leading-none mb-0.5">+120% Traffic</p>
                   <p className="text-[9px] text-[#778DA9]">After launch</p>
                 </div>
               </motion.div>
@@ -431,95 +420,82 @@ export default function Home() {
         </section>
 
         {/* 3. Trust Bar */}
-        <section className="py-12 bg-white border-y border-[#E0E1DD]">
+        <section className="py-12 bg-white dark:bg-[#1B263B] border-y border-[#E0E1DD] dark:border-white/10">
           <div className="container mx-auto px-4 md:px-6">
             <p className="text-center text-sm font-semibold text-[#778DA9] uppercase tracking-wider mb-8">
               Trusted by businesses across Germany
             </p>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
-              <div className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
-                <Utensils className="h-8 w-8 text-[#415A77]" />
-                <span className="text-xs font-medium text-[#1B263B]">Restaurant</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
-                <Scissors className="h-8 w-8 text-[#415A77]" />
-                <span className="text-xs font-medium text-[#1B263B]">Barber & Salon</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
-                <Stethoscope className="h-8 w-8 text-[#415A77]" />
-                <span className="text-xs font-medium text-[#1B263B]">Medical Clinic</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
-                <ShoppingBag className="h-8 w-8 text-[#415A77]" />
-                <span className="text-xs font-medium text-[#1B263B]">E-Commerce</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
-                <MapPin className="h-8 w-8 text-[#415A77]" />
-                <span className="text-xs font-medium text-[#1B263B]">Local Services</span>
-              </div>
-              <div className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
-                <Building className="h-8 w-8 text-[#415A77]" />
-                <span className="text-xs font-medium text-[#1B263B]">Real Estate</span>
-              </div>
+              {[
+                { Icon: Utensils, label: 'Restaurant' },
+                { Icon: Scissors, label: 'Barber & Salon' },
+                { Icon: Stethoscope, label: 'Medical Clinic' },
+                { Icon: ShoppingBag, label: 'E-Commerce' },
+                { Icon: MapPin, label: 'Local Services' },
+                { Icon: Building, label: 'Real Estate' },
+              ].map(({ Icon, label }) => (
+                <div key={label} className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
+                  <Icon className="h-8 w-8 text-[#415A77]" />
+                  <span className="text-xs font-medium text-[#1B263B] dark:text-[#E0E1DD]">{label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
-        {/* 4. Services Section (Bento Grid) */}
-        <section id="services" className="py-24 bg-[#F5F5F5]">
+        {/* 4. Services Section */}
+        <section id="services" className="py-24 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <Badge variant="outline" className="mb-4 bg-white border-[#E0E1DD] text-[#415A77]">Services</Badge>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] mb-4 tracking-tight">What We Do</h2>
+              <Badge variant="outline" className="mb-4 bg-white dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Services</Badge>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">What We Do</h2>
               <p className="text-lg text-[#778DA9]">
                 Simple, modern, and business-focused digital solutions for growing brands.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
-              {/* Row 1: Card A - Website Development */}
-              <motion.div 
+              {/* Card A — Website Development */}
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                className="rounded-3xl overflow-hidden bg-white shadow-sm border border-[#E0E1DD] flex flex-col h-full"
+                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full"
               >
-                {/* Top Half: Visual */}
                 <div className="h-64 bg-gradient-to-br from-[#1B263B] to-[#415A77] p-6 relative overflow-hidden flex items-end justify-center">
-                  <div className="w-[80%] h-[90%] bg-white rounded-t-xl shadow-lg border border-white/10 flex flex-col overflow-hidden">
-                    <div className="h-6 border-b border-[#E0E1DD] flex items-center px-3 gap-1.5">
-                      <div className="w-2 h-2 rounded-full bg-[#E0E1DD]"></div>
-                      <div className="w-2 h-2 rounded-full bg-[#E0E1DD]"></div>
-                      <div className="w-2 h-2 rounded-full bg-[#E0E1DD]"></div>
+                  <div className="w-[80%] h-[90%] bg-white dark:bg-[#0D1B2A] rounded-t-xl shadow-lg border border-white/10 flex flex-col overflow-hidden">
+                    <div className="h-6 border-b border-[#E0E1DD] dark:border-white/10 flex items-center px-3 gap-1.5">
+                      <div className="w-2 h-2 rounded-full bg-[#E0E1DD]" />
+                      <div className="w-2 h-2 rounded-full bg-[#E0E1DD]" />
+                      <div className="w-2 h-2 rounded-full bg-[#E0E1DD]" />
                     </div>
                     <div className="p-4 space-y-4">
                       <div className="flex justify-between">
-                        <div className="w-16 h-3 bg-[#E0E1DD] rounded"></div>
+                        <div className="w-16 h-3 bg-[#E0E1DD] rounded" />
                         <div className="flex gap-2">
-                          <div className="w-8 h-2 bg-[#E0E1DD] rounded"></div>
-                          <div className="w-8 h-2 bg-[#E0E1DD] rounded"></div>
+                          <div className="w-8 h-2 bg-[#E0E1DD] rounded" />
+                          <div className="w-8 h-2 bg-[#E0E1DD] rounded" />
                         </div>
                       </div>
-                      <div className="h-20 bg-[#F5F5F5] rounded-lg"></div>
+                      <div className="h-20 bg-[#F5F5F5] dark:bg-[#415A77]/20 rounded-lg" />
                       <div className="flex gap-2">
-                        <div className="h-16 flex-1 bg-[#F5F5F5] rounded-lg"></div>
-                        <div className="h-16 flex-1 bg-[#F5F5F5] rounded-lg"></div>
+                        <div className="h-16 flex-1 bg-[#F5F5F5] dark:bg-[#415A77]/20 rounded-lg" />
+                        <div className="h-16 flex-1 bg-[#F5F5F5] dark:bg-[#415A77]/20 rounded-lg" />
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* Bottom Half: Content */}
                 <div className="p-8 flex flex-col flex-1">
-                  <div className="w-12 h-12 rounded-xl bg-[#415A77]/10 flex items-center justify-center text-[#415A77] mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-[#415A77]/10 dark:bg-[#415A77]/20 flex items-center justify-center text-[#415A77] mb-6">
                     <Layout className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3">Website Development</h3>
+                  <h3 className="text-2xl font-bold text-[#0D1B2A] dark:text-white mb-3">Website Development</h3>
                   <p className="text-[#778DA9] mb-6 flex-1">
                     Modern responsive websites designed to help businesses build trust, improve visibility, and convert visitors into customers.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {['Responsive Design', 'SEO Basics', 'Fast Performance'].map(pill => (
-                      <span key={pill} className="text-xs font-medium bg-[#F5F5F5] text-[#1B263B] px-3 py-1.5 rounded-full border border-[#E0E1DD]">
+                      <span key={pill} className="text-xs font-medium bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#1B263B] dark:text-[#E0E1DD] px-3 py-1.5 rounded-full border border-[#E0E1DD] dark:border-white/10">
                         {pill}
                       </span>
                     ))}
@@ -527,37 +503,35 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Row 1: Card B - Social Media Content */}
-              <motion.div 
+              {/* Card B — Social Media */}
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: 0.1 }}
-                className="rounded-3xl overflow-hidden bg-white shadow-sm border border-[#E0E1DD] flex flex-col h-full"
+                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full"
               >
-                {/* Top Half: Visual */}
                 <div className="h-64 bg-gradient-to-br from-[#415A77] to-[#778DA9] p-6 relative overflow-hidden flex items-center justify-center">
                   <div className="grid grid-cols-3 gap-2 w-[70%]">
-                    <div className="aspect-square bg-white rounded-lg shadow-md"></div>
-                    <div className="aspect-square bg-white/50 rounded-lg shadow-md border border-white/20"></div>
-                    <div className="aspect-square bg-white rounded-lg shadow-md"></div>
-                    <div className="aspect-square bg-white/50 rounded-lg shadow-md border border-white/20"></div>
-                    <div className="aspect-square bg-white rounded-lg shadow-md"></div>
-                    <div className="aspect-square bg-white/50 rounded-lg shadow-md border border-white/20"></div>
+                    <div className="aspect-square bg-white rounded-lg shadow-md" />
+                    <div className="aspect-square bg-white/50 rounded-lg shadow-md border border-white/20" />
+                    <div className="aspect-square bg-white rounded-lg shadow-md" />
+                    <div className="aspect-square bg-white/50 rounded-lg shadow-md border border-white/20" />
+                    <div className="aspect-square bg-white rounded-lg shadow-md" />
+                    <div className="aspect-square bg-white/50 rounded-lg shadow-md border border-white/20" />
                   </div>
                 </div>
-                {/* Bottom Half: Content */}
                 <div className="p-8 flex flex-col flex-1">
-                  <div className="w-12 h-12 rounded-xl bg-[#415A77]/10 flex items-center justify-center text-[#415A77] mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-[#415A77]/10 dark:bg-[#415A77]/20 flex items-center justify-center text-[#415A77] mb-6">
                     <Smartphone className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl font-bold text-[#0D1B2A] mb-3">Social Media Content</h3>
+                  <h3 className="text-2xl font-bold text-[#0D1B2A] dark:text-white mb-3">Social Media Content</h3>
                   <p className="text-[#778DA9] mb-6 flex-1">
                     Professional social media visuals that keep your brand consistent and visually strong across platforms.
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {['Post Design', 'Story Design', 'Brand Consistency'].map(pill => (
-                      <span key={pill} className="text-xs font-medium bg-[#F5F5F5] text-[#1B263B] px-3 py-1.5 rounded-full border border-[#E0E1DD]">
+                      <span key={pill} className="text-xs font-medium bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#1B263B] dark:text-[#E0E1DD] px-3 py-1.5 rounded-full border border-[#E0E1DD] dark:border-white/10">
                         {pill}
                       </span>
                     ))}
@@ -565,15 +539,14 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* Row 2: Full-width Card */}
-              <motion.div 
+              {/* Full-width Card — Data-Driven */}
+              <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: 0.2 }}
-                className="md:col-span-2 rounded-3xl overflow-hidden bg-white shadow-sm border border-[#E0E1DD] flex flex-col md:flex-row h-full"
+                className="md:col-span-2 rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm border border-[#E0E1DD] dark:border-white/10 flex flex-col md:flex-row h-full"
               >
-                {/* Left Side: Dark Analytics Panel */}
                 <div className="md:w-1/2 bg-[#0D1B2A] p-8 md:p-12 relative overflow-hidden flex flex-col justify-center min-h-[300px]">
                   <h4 className="text-white font-bold text-xl mb-8 relative z-10">Data-Driven Growth</h4>
                   <div className="absolute inset-0 pt-32 px-8 flex items-end">
@@ -587,25 +560,24 @@ export default function Home() {
                     </svg>
                   </div>
                 </div>
-                {/* Right Side: Content */}
-                <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-[#F5F5F5]">
-                  <h3 className="text-3xl font-bold text-[#0D1B2A] mb-8">Built for Conversion</h3>
+                <div className="md:w-1/2 p-8 md:p-12 flex flex-col justify-center bg-[#F5F5F5] dark:bg-[#1B263B]">
+                  <h3 className="text-3xl font-bold text-[#0D1B2A] dark:text-white mb-8">Built for Conversion</h3>
                   <div className="space-y-6">
                     <div className="flex gap-4">
-                      <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center shrink-0 border border-[#E0E1DD]">
+                      <div className="w-10 h-10 rounded-full bg-white dark:bg-[#0D1B2A] shadow-sm flex items-center justify-center shrink-0 border border-[#E0E1DD] dark:border-white/10">
                         <TrendingUp className="h-5 w-5 text-[#415A77]" />
                       </div>
                       <div>
-                        <h5 className="font-bold text-[#0D1B2A]">Performance Tracking</h5>
+                        <h5 className="font-bold text-[#0D1B2A] dark:text-white">Performance Tracking</h5>
                         <p className="text-sm text-[#778DA9] mt-1">Websites built with analytics in mind from day one.</p>
                       </div>
                     </div>
                     <div className="flex gap-4">
-                      <div className="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center shrink-0 border border-[#E0E1DD]">
+                      <div className="w-10 h-10 rounded-full bg-white dark:bg-[#0D1B2A] shadow-sm flex items-center justify-center shrink-0 border border-[#E0E1DD] dark:border-white/10">
                         <Rocket className="h-5 w-5 text-[#415A77]" />
                       </div>
                       <div>
-                        <h5 className="font-bold text-[#0D1B2A]">Fast Loading Speeds</h5>
+                        <h5 className="font-bold text-[#0D1B2A] dark:text-white">Fast Loading Speeds</h5>
                         <p className="text-sm text-[#778DA9] mt-1">Optimized assets and code for maximum performance.</p>
                       </div>
                     </div>
@@ -616,21 +588,20 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 5. "Super Power" Statement Section (Why Choose Us) */}
-        <section className="py-24 bg-[#0D1B2A]">
+        {/* 5. Why Choose Us */}
+        <section className="py-24 bg-[#0D1B2A] dark:bg-[#070D15]">
           <div className="container mx-auto px-4 md:px-6">
             <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] tracking-tight">
-                  Modern Design<br/>With A Business<br/>
+                  Modern Design<br />With A Business<br />
                   <span className="text-[#778DA9]">Mindset.</span>
                 </h2>
               </motion.div>
-              
               <div className="grid sm:grid-cols-2 gap-8">
                 {[
                   { title: 'Professional Look', desc: 'Build trust with clean and premium digital presence.', icon: Shield },
@@ -638,7 +609,7 @@ export default function Home() {
                   { title: 'Responsive Experience', desc: 'Websites optimized for desktop, tablet, and mobile devices.', icon: Smartphone },
                   { title: 'Clear Communication', desc: 'Simple process, fast communication, and reliable delivery.', icon: MessageSquare }
                 ].map((item, i) => (
-                  <motion.div 
+                  <motion.div
                     key={item.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -659,22 +630,21 @@ export default function Home() {
         </section>
 
         {/* 6. Portfolio Section */}
-        <section id="work" className="py-24 bg-white">
+        <section id="work" className="py-24 bg-white dark:bg-[#0D1B2A]">
           <div className="container mx-auto px-4 md:px-6">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 max-w-6xl mx-auto">
               <div className="max-w-2xl">
-                <Badge variant="outline" className="mb-4 bg-[#F5F5F5] border-[#E0E1DD] text-[#415A77]">Selected Work</Badge>
-                <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] mb-4 tracking-tight">Recent Projects</h2>
+                <Badge variant="outline" className="mb-4 bg-[#F5F5F5] dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Selected Work</Badge>
+                <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">Recent Projects</h2>
                 <p className="text-lg text-[#778DA9]">
                   A selection of modern website and branding concepts created for businesses.
                 </p>
               </div>
-              <Button variant="outline" className="border-[#E0E1DD] text-[#0D1B2A] hover:bg-[#F5F5F5] w-full md:w-auto">
+              <Button variant="outline" className="border-[#E0E1DD] dark:border-white/10 text-[#0D1B2A] dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-white/8 w-full md:w-auto">
                 View All Projects <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </div>
 
-            {/* Masonry Grid */}
             <div className="columns-1 md:columns-2 gap-8 max-w-6xl mx-auto space-y-8">
               {[
                 { title: 'Barber Website', desc: 'Modern landing page with integrated booking system.', category: 'Website', color: 'from-[#1B263B] to-[#415A77]', height: 'h-72' },
@@ -682,7 +652,7 @@ export default function Home() {
                 { title: 'Medical Clinic Website', desc: 'Trust-building professional layout with patient forms.', category: 'Website', color: 'from-[#778DA9] to-[#E0E1DD]', height: 'h-80' },
                 { title: 'Social Media Branding Pack', desc: 'Cohesive visual templates for Instagram and Facebook.', category: 'Branding', color: 'from-[#0D1B2A] to-[#1B263B]', height: 'h-72' }
               ].map((project, i) => (
-                <motion.div 
+                <motion.div
                   key={project.title}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -690,28 +660,26 @@ export default function Home() {
                   transition={{ delay: (i % 2) * 0.2 }}
                   className="group cursor-pointer break-inside-avoid"
                 >
-                  <Card className="overflow-hidden border border-[#E0E1DD] bg-white hover:shadow-xl transition-all duration-500 rounded-2xl flex flex-col">
+                  <Card className="overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-xl transition-all duration-500 rounded-2xl flex flex-col">
                     <div className={`${project.height} w-full bg-gradient-to-br ${project.color} relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-700`}>
-                      <div className="absolute inset-0 bg-[#0D1B2A]/5 mix-blend-overlay"></div>
-                      
-                      {/* CSS Wireframe Overlay */}
+                      <div className="absolute inset-0 bg-[#0D1B2A]/5 mix-blend-overlay" />
                       <div className="absolute inset-4 md:inset-8 border border-white/20 rounded-xl overflow-hidden flex flex-col backdrop-blur-sm bg-white/5">
                         <div className="h-8 border-b border-white/20 flex items-center px-4">
-                          <div className="w-12 h-2 bg-white/30 rounded-full"></div>
+                          <div className="w-12 h-2 bg-white/30 rounded-full" />
                         </div>
                         <div className="flex-1 p-4 md:p-6 space-y-4">
-                          <div className="w-3/4 h-6 bg-white/20 rounded-md"></div>
-                          <div className="w-1/2 h-4 bg-white/10 rounded-md"></div>
+                          <div className="w-3/4 h-6 bg-white/20 rounded-md" />
+                          <div className="w-1/2 h-4 bg-white/10 rounded-md" />
                           <div className="mt-8 grid grid-cols-2 gap-4">
-                            <div className="h-20 bg-white/10 rounded-lg"></div>
-                            <div className="h-20 bg-white/10 rounded-lg"></div>
+                            <div className="h-20 bg-white/10 rounded-lg" />
+                            <div className="h-20 bg-white/10 rounded-lg" />
                           </div>
                         </div>
                       </div>
                     </div>
                     <CardContent className="p-6 md:p-8">
-                      <Badge variant="secondary" className="mb-4 bg-[#F5F5F5] text-[#415A77] hover:bg-[#E0E1DD] font-medium">{project.category}</Badge>
-                      <h3 className="text-xl md:text-2xl font-bold text-[#0D1B2A] mb-3 flex items-center justify-between group-hover:text-[#415A77] transition-colors">
+                      <Badge variant="secondary" className="mb-4 bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#415A77] dark:text-[#778DA9] hover:bg-[#E0E1DD] font-medium">{project.category}</Badge>
+                      <h3 className="text-xl md:text-2xl font-bold text-[#0D1B2A] dark:text-white mb-3 flex items-center justify-between group-hover:text-[#415A77] transition-colors">
                         {project.title}
                         <ExternalLink className="h-5 w-5 text-[#778DA9] opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300" />
                       </h3>
@@ -727,18 +695,15 @@ export default function Home() {
         {/* 6b. Social Media Showcase */}
         <SocialCarousel onViewMore={() => scrollTo('work')} />
 
-        {/* 7. Process Section (Horizontal Timeline) */}
-        <section id="process" className="py-24 bg-[#F5F5F5]">
+        {/* 7. Process Section */}
+        <section id="process" className="py-24 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-20">
-              <Badge variant="outline" className="mb-4 bg-white border-[#E0E1DD] text-[#415A77]">Our Process</Badge>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] mb-4 tracking-tight">How We Work</h2>
+              <Badge variant="outline" className="mb-4 bg-white dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Our Process</Badge>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">How We Work</h2>
             </div>
-
             <div className="relative max-w-6xl mx-auto">
-              {/* Connecting Line (hidden on mobile) */}
-              <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-[2px] border-t-2 border-dashed border-[#778DA9]/30"></div>
-
+              <div className="hidden md:block absolute top-[60px] left-[10%] right-[10%] h-[2px] border-t-2 border-dashed border-[#778DA9]/30" />
               <div className="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-6 relative z-10">
                 {[
                   { num: '01', title: 'Discovery', desc: 'Understanding your business goals and target audience.' },
@@ -746,7 +711,7 @@ export default function Home() {
                   { num: '03', title: 'Development', desc: 'Building the website with modern, fast technologies.' },
                   { num: '04', title: 'Launch', desc: 'Final testing and going live to the world.' }
                 ].map((step, i) => (
-                  <motion.div 
+                  <motion.div
                     key={step.num}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -754,11 +719,11 @@ export default function Home() {
                     transition={{ delay: i * 0.15 }}
                     className="flex flex-col items-center text-center relative"
                   >
-                    <div className="bg-[#F5F5F5] px-4 py-2 mb-2">
-                      <span className="text-6xl md:text-7xl font-bold text-[#0D1B2A]/5">{step.num}</span>
+                    <div className="bg-[#F5F5F5] dark:bg-[#0D1B2A] px-4 py-2 mb-2">
+                      <span className="text-6xl md:text-7xl font-bold text-[#0D1B2A]/5 dark:text-white/5">{step.num}</span>
                     </div>
-                    <div className="w-4 h-4 rounded-full bg-[#1B263B] border-4 border-[#F5F5F5] absolute top-[52px] hidden md:block"></div>
-                    <h3 className="text-xl font-bold text-[#0D1B2A] mb-3 mt-4 md:mt-8">{step.title}</h3>
+                    <div className="w-4 h-4 rounded-full bg-[#1B263B] dark:bg-[#415A77] border-4 border-[#F5F5F5] dark:border-[#0D1B2A] absolute top-[52px] hidden md:block" />
+                    <h3 className="text-xl font-bold text-[#0D1B2A] dark:text-white mb-3 mt-4 md:mt-8">{step.title}</h3>
                     <p className="text-[#778DA9] text-sm max-w-[200px]">{step.desc}</p>
                   </motion.div>
                 ))}
@@ -768,11 +733,11 @@ export default function Home() {
         </section>
 
         {/* 8. Pricing Section */}
-        <section id="pricing" className="py-24 bg-white border-t border-[#E0E1DD]">
+        <section id="pricing" className="py-24 bg-white dark:bg-[#1B263B] border-t border-[#E0E1DD] dark:border-white/10">
           <div className="container mx-auto px-4 md:px-6">
             <div className="text-center max-w-3xl mx-auto mb-16">
-              <Badge variant="outline" className="mb-4 bg-[#F5F5F5] border-[#E0E1DD] text-[#415A77]">Pricing</Badge>
-              <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] mb-4 tracking-tight">Flexible Solutions For Growing Businesses</h2>
+              <Badge variant="outline" className="mb-4 bg-[#F5F5F5] dark:bg-[#0D1B2A] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Pricing</Badge>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">Flexible Solutions For Growing Businesses</h2>
               <p className="text-lg text-[#778DA9]">
                 Transparent pricing designed for businesses that want a professional online presence without unnecessary complexity.
               </p>
@@ -781,70 +746,70 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
               {/* Starter */}
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-                <Card className="h-full border border-[#E0E1DD] bg-white flex flex-col rounded-3xl shadow-sm">
+                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm">
                   <CardContent className="p-8 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-[#0D1B2A] mb-2">Starter Website</h3>
+                    <h3 className="text-xl font-bold text-[#0D1B2A] dark:text-white mb-2">Starter Website</h3>
                     <p className="text-sm text-[#778DA9] mb-6">Small businesses & personal brands</p>
                     <div className="mb-6">
                       <span className="text-sm text-[#778DA9]">Starting from</span>
-                      <div className="text-4xl font-bold text-[#0D1B2A] tracking-tight">€499</div>
+                      <div className="text-4xl font-bold text-[#0D1B2A] dark:text-white tracking-tight">€499</div>
                     </div>
                     <ul className="space-y-4 mb-8 flex-1">
                       {['Modern Landing Page', 'Mobile Responsive', 'Contact Form', 'Basic SEO'].map((feature) => (
-                        <li key={feature} className="flex items-start gap-3 text-sm text-[#0D1B2A]">
+                        <li key={feature} className="flex items-start gap-3 text-sm text-[#0D1B2A] dark:text-[#E0E1DD]">
                           <Check className="h-5 w-5 text-[#415A77] flex-shrink-0" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    <Button className="w-full bg-[#F5F5F5] text-[#0D1B2A] hover:bg-[#E0E1DD] border border-[#E0E1DD]">Get Started</Button>
+                    <Button className="w-full bg-[#F5F5F5] dark:bg-[#1B263B] text-[#0D1B2A] dark:text-white hover:bg-[#E0E1DD] dark:hover:bg-[#415A77]/30 border border-[#E0E1DD] dark:border-white/10">Get Started</Button>
                   </CardContent>
                 </Card>
               </motion.div>
 
-              {/* Business - Popular */}
+              {/* Business — Popular */}
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                <Card className="h-full border-none bg-[#0D1B2A] shadow-2xl relative flex flex-col rounded-3xl transform md:-translate-y-4">
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#415A77] text-white hover:bg-[#415A77]">Most Popular</Badge>
+                <Card className="h-full border-none bg-[#0D1B2A] dark:bg-[#415A77] shadow-2xl relative flex flex-col rounded-3xl transform md:-translate-y-4">
+                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#415A77] dark:bg-white dark:text-[#0D1B2A] text-white hover:bg-[#415A77]">Most Popular</Badge>
                   <CardContent className="p-8 flex-1 flex flex-col text-white">
                     <h3 className="text-xl font-bold mb-2 mt-2">Business Website</h3>
-                    <p className="text-sm text-[#778DA9] mb-6">Growing businesses</p>
+                    <p className="text-sm text-[#778DA9] dark:text-white/70 mb-6">Growing businesses</p>
                     <div className="mb-6">
-                      <span className="text-sm text-[#778DA9]">Starting from</span>
+                      <span className="text-sm text-[#778DA9] dark:text-white/70">Starting from</span>
                       <div className="text-4xl font-bold tracking-tight">€999</div>
                     </div>
                     <ul className="space-y-4 mb-8 flex-1">
                       {['Multi-Page Website', 'Premium UI Design', 'Mobile Responsive', 'SEO Basics', 'Booking System', 'Google Maps'].map((feature) => (
                         <li key={feature} className="flex items-start gap-3 text-sm font-medium">
-                          <Check className="h-5 w-5 text-[#415A77] flex-shrink-0" />
+                          <Check className="h-5 w-5 text-[#778DA9] dark:text-white flex-shrink-0" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    <Button className="w-full bg-white text-[#0D1B2A] hover:bg-[#F5F5F5]">Get Started</Button>
+                    <Button className="w-full bg-white dark:bg-[#0D1B2A] text-[#0D1B2A] dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-[#1B263B]">Get Started</Button>
                   </CardContent>
                 </Card>
               </motion.div>
 
               {/* E-Commerce */}
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-                <Card className="h-full border border-[#E0E1DD] bg-white flex flex-col rounded-3xl shadow-sm">
+                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm">
                   <CardContent className="p-8 flex-1 flex flex-col">
-                    <h3 className="text-xl font-bold text-[#0D1B2A] mb-2">E-Commerce</h3>
+                    <h3 className="text-xl font-bold text-[#0D1B2A] dark:text-white mb-2">E-Commerce</h3>
                     <p className="text-sm text-[#778DA9] mb-6">Online stores</p>
                     <div className="mb-6">
                       <span className="text-sm text-[#778DA9]">Starting from</span>
-                      <div className="text-4xl font-bold text-[#0D1B2A] tracking-tight">€1,999</div>
+                      <div className="text-4xl font-bold text-[#0D1B2A] dark:text-white tracking-tight">€1,999</div>
                     </div>
                     <ul className="space-y-4 mb-8 flex-1">
                       {['Online Store Setup', 'Payment Integration', 'Product Management', 'Advanced SEO'].map((feature) => (
-                        <li key={feature} className="flex items-start gap-3 text-sm text-[#0D1B2A]">
+                        <li key={feature} className="flex items-start gap-3 text-sm text-[#0D1B2A] dark:text-[#E0E1DD]">
                           <Check className="h-5 w-5 text-[#415A77] flex-shrink-0" />
                           <span>{feature}</span>
                         </li>
                       ))}
                     </ul>
-                    <Button className="w-full bg-[#F5F5F5] text-[#0D1B2A] hover:bg-[#E0E1DD] border border-[#E0E1DD]">Get Started</Button>
+                    <Button className="w-full bg-[#F5F5F5] dark:bg-[#1B263B] text-[#0D1B2A] dark:text-white hover:bg-[#E0E1DD] dark:hover:bg-[#415A77]/30 border border-[#E0E1DD] dark:border-white/10">Get Started</Button>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -852,10 +817,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 9. Final CTA & Footer */}
+        {/* 9. Final CTA */}
         <section id="contact" className="py-24 bg-[#1B263B]">
           <div className="container mx-auto px-4 md:px-6">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -879,7 +844,6 @@ export default function Home() {
         <div className="border-b border-white/10">
           <div className="container mx-auto px-4 md:px-8 max-w-7xl py-14">
             <div className="rounded-2xl bg-[#1B263B] px-8 md:px-14 py-10 flex flex-col md:flex-row md:items-center gap-8">
-              {/* Left text */}
               <div className="flex-1">
                 <h3 className="text-xl md:text-2xl font-bold text-white leading-snug mb-2">
                   Get tips on growing your business online
@@ -888,7 +852,6 @@ export default function Home() {
                   Monthly insights on web design, social media, and digital marketing. No spam, unsubscribe anytime.
                 </p>
               </div>
-              {/* Right form */}
               <div className="flex-1 max-w-md w-full">
                 <NewsletterForm />
               </div>
@@ -909,7 +872,6 @@ export default function Home() {
               <p className="text-[#778DA9] text-sm leading-relaxed mb-6 max-w-[220px]">
                 Modern websites and social media content for businesses that want to stand out online.
               </p>
-              {/* Social icons */}
               <div className="flex items-center gap-3">
                 {[
                   { Icon: Instagram, label: 'Instagram' },
@@ -956,13 +918,7 @@ export default function Home() {
             <div>
               <h4 className="text-white text-sm font-semibold mb-5 tracking-wide">Services</h4>
               <ul className="space-y-3">
-                {[
-                  'Website Development',
-                  'Social Media Content',
-                  'Brand Identity',
-                  'SEO Basics',
-                  'Performance Tracking',
-                ].map(label => (
+                {['Website Development', 'Social Media Content', 'Brand Identity', 'SEO Basics', 'Performance Tracking'].map(label => (
                   <li key={label}>
                     <a href="#" className="text-[#778DA9] text-sm hover:text-white transition-colors duration-150">{label}</a>
                   </li>

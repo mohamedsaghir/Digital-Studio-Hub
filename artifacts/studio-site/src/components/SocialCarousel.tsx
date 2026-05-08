@@ -2,6 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useTheme } from '@/contexts/theme';
 
 const posts = [
   { id: 1, label: 'Restaurant', title: 'Grand Opening', bg: 'from-[#0D1B2A] to-[#1B263B]', accent: '#415A77', type: 'event' },
@@ -108,6 +109,7 @@ function PostCard({ post }: { post: typeof posts[0] }) {
 }
 
 export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void }) {
+  const { theme } = useTheme();
   const [active, setActive] = useState(0);
   const [dragging, setDragging] = useState(false);
   const dragStartX = useRef(0);
@@ -137,7 +139,7 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
   const CARD_H = Math.round(CARD_W * 5 / 4); // 275
 
   return (
-    <section className="py-20 md:py-28 bg-white overflow-hidden">
+    <section className="py-20 md:py-28 bg-white dark:bg-[#1B263B] overflow-hidden transition-colors duration-300">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
 
         {/* ── Two-column grid ── */}
@@ -151,11 +153,11 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
             transition={{ duration: 0.6 }}
             className="lg:w-[40%] flex-shrink-0"
           >
-            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#415A77] bg-[#E0E1DD] px-3 py-1.5 rounded-full mb-6">
+            <span className="inline-block text-xs font-semibold tracking-widest uppercase text-[#415A77] dark:text-[#778DA9] bg-[#E0E1DD] dark:bg-[#415A77]/20 px-3 py-1.5 rounded-full mb-6">
               Social Media Work
             </span>
 
-            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold text-[#0D1B2A] leading-[1.12] tracking-tight mb-5">
+            <h2 className="text-3xl md:text-4xl xl:text-5xl font-bold text-[#0D1B2A] dark:text-white leading-[1.12] tracking-tight mb-5">
               Content That Stops<br />
               <span className="text-[#415A77]">The Scroll</span>
             </h2>
@@ -167,7 +169,7 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
             <Button
               onClick={onViewMore}
               variant="outline"
-              className="border-[#0D1B2A] text-[#0D1B2A] hover:bg-[#0D1B2A] hover:text-white h-11 px-7 rounded-full font-semibold transition-all duration-200 group"
+              className="border-[#0D1B2A] dark:border-white/20 text-[#0D1B2A] dark:text-white hover:bg-[#0D1B2A] dark:hover:bg-white/10 hover:text-white h-11 px-7 rounded-full font-semibold transition-all duration-200 group"
             >
               View More Work
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -250,7 +252,7 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
                 <div className="flex items-center gap-4">
                   <button
                     onClick={prev}
-                    className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
+                    className="w-10 h-10 rounded-full border border-[#E0E1DD] dark:border-white/10 bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#415A77] dark:text-[#778DA9] flex items-center justify-center hover:bg-[#0D1B2A] dark:hover:bg-white hover:text-white dark:hover:text-[#0D1B2A] hover:border-[#0D1B2A] dark:hover:border-white transition-all duration-200 shadow-sm"
                     aria-label="Previous"
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -263,14 +265,20 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
                         onClick={() => setActive(i)}
                         aria-label={`Slide ${i + 1}`}
                         className="rounded-full transition-all duration-300"
-                        style={{ width: i === active ? 22 : 6, height: 6, background: i === active ? '#0D1B2A' : '#E0E1DD' }}
+                        style={{
+                          width: i === active ? 22 : 6,
+                          height: 6,
+                          background: i === active
+                            ? (theme === 'dark' ? '#E0E1DD' : '#0D1B2A')
+                            : (theme === 'dark' ? 'rgba(255,255,255,0.15)' : '#E0E1DD'),
+                        }}
                       />
                     ))}
                   </div>
 
                   <button
                     onClick={next}
-                    className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
+                    className="w-10 h-10 rounded-full border border-[#E0E1DD] dark:border-white/10 bg-[#F5F5F5] dark:bg-[#0D1B2A] text-[#415A77] dark:text-[#778DA9] flex items-center justify-center hover:bg-[#0D1B2A] dark:hover:bg-white hover:text-white dark:hover:text-[#0D1B2A] hover:border-[#0D1B2A] dark:hover:border-white transition-all duration-200 shadow-sm"
                     aria-label="Next"
                   >
                     <ChevronRight className="h-4 w-4" />

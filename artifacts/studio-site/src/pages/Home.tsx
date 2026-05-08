@@ -152,7 +152,7 @@ export default function Home() {
             </button>
             <Button
               onClick={() => scrollTo('contact')}
-              className="bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] rounded-lg px-5 h-9 text-sm font-semibold shadow-sm"
+              className="btn-glow bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] rounded-lg px-5 h-9 text-sm font-semibold shadow-sm"
             >
               Let's Talk
             </Button>
@@ -241,6 +241,12 @@ export default function Home() {
         {/* 2. Hero Section */}
         <section id="home" className="relative pt-20 pb-16 md:pt-28 md:pb-20 overflow-hidden bg-[#F5F5F5] dark:bg-[#0D1B2A]">
           <NetworkBackground />
+          {/* Hero ambient glow — radial light behind headline */}
+          <div className="absolute inset-0 pointer-events-none z-[1]">
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/3 w-[800px] h-[600px] rounded-full bg-[#415A77]/7 dark:bg-[#415A77]/14 blur-[130px]" />
+            <div className="absolute -top-10 right-0 w-[450px] h-[450px] rounded-full bg-[#1B263B]/4 dark:bg-[#778DA9]/6 blur-[100px]" />
+            <div className="absolute bottom-0 left-0 w-[350px] h-[350px] rounded-full bg-[#778DA9]/4 dark:bg-[#415A77]/6 blur-[100px]" />
+          </div>
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="flex flex-col mb-10 items-center text-center">
               <motion.div
@@ -265,7 +271,7 @@ export default function Home() {
                     </Button>
                   </motion.div>
                   <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={{ duration: 0.18 }}>
-                    <Button onClick={() => scrollTo('contact')} size="lg" className="bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] font-medium h-12 px-8 shadow-lg shadow-[#0D1B2A]/20 dark:shadow-[#415A77]/30">
+                    <Button onClick={() => scrollTo('contact')} size="lg" className="btn-glow bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] font-medium h-12 px-8 shadow-lg shadow-[#0D1B2A]/20 dark:shadow-[#415A77]/30">
                       Start a Project <motion.span animate={{ x: [0, 3, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }} className="ml-2 inline-block"><ArrowRight className="h-4 w-4" /></motion.span>
                     </Button>
                   </motion.div>
@@ -490,8 +496,10 @@ export default function Home() {
 
 
         {/* 4. Services Section */}
-        <section id="services" className="py-24 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section id="services" className="relative overflow-hidden py-24 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
+          <motion.div animate={{ x: [0,25,0], y: [0,-20,0] }} transition={{ repeat: Infinity, duration: 16, ease: 'easeInOut' }} className="absolute -top-48 -right-48 w-[560px] h-[560px] rounded-full bg-[#415A77]/6 dark:bg-[#415A77]/11 blur-[110px] pointer-events-none" />
+          <motion.div animate={{ x: [0,-20,0], y: [0,25,0] }} transition={{ repeat: Infinity, duration: 20, ease: 'easeInOut', delay: 5 }} className="absolute -bottom-48 -left-48 w-[480px] h-[480px] rounded-full bg-[#778DA9]/5 dark:bg-[#778DA9]/8 blur-[120px] pointer-events-none" />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <Badge variant="outline" className="mb-4 bg-white dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Services</Badge>
               <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">What We Do</h2>
@@ -507,7 +515,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
-                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm hover:shadow-xl dark:hover:shadow-[#415A77]/10 border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full transition-shadow duration-300"
+                className="card-glow rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm hover:shadow-xl dark:hover:shadow-[#415A77]/10 border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full transition-shadow duration-300"
               >
                 <div className="h-64 bg-gradient-to-br from-[#1B263B] to-[#415A77] p-6 relative overflow-hidden flex items-end justify-center">
                   <div className="w-[80%] h-[90%] bg-white dark:bg-[#0D1B2A] rounded-t-xl shadow-lg border border-white/10 flex flex-col overflow-hidden">
@@ -557,7 +565,7 @@ export default function Home() {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: 0.1 }}
                 whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
-                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm hover:shadow-xl dark:hover:shadow-[#415A77]/10 border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full transition-shadow duration-300"
+                className="card-glow rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm hover:shadow-xl dark:hover:shadow-[#415A77]/10 border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full transition-shadow duration-300"
               >
                 <div className="h-64 bg-gradient-to-br from-[#415A77] to-[#778DA9] p-6 relative overflow-hidden flex items-center justify-center">
                   <div className="grid grid-cols-3 gap-2 w-[70%]">
@@ -637,8 +645,16 @@ export default function Home() {
         </section>
 
         {/* 5. Why Choose Us */}
-        <section className="py-24 bg-[#0D1B2A] dark:bg-[#070D15]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section className="relative overflow-hidden py-24 bg-[#0D1B2A] dark:bg-[#070D15]">
+          {/* top highlight line */}
+          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#415A77]/50 to-transparent pointer-events-none" />
+          {/* bottom highlight line */}
+          <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#415A77]/30 to-transparent pointer-events-none" />
+          {/* center spotlight */}
+          <motion.div animate={{ opacity: [0.5, 0.85, 0.5] }} transition={{ repeat: Infinity, duration: 8, ease: 'easeInOut' }} className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[450px] rounded-full bg-[#415A77]/10 blur-[130px] pointer-events-none" />
+          <motion.div animate={{ x: [0,40,0], y: [0,30,0] }} transition={{ repeat: Infinity, duration: 22, ease: 'easeInOut', delay: 4 }} className="absolute -bottom-24 -right-24 w-[450px] h-[450px] rounded-full bg-[#778DA9]/8 blur-[100px] pointer-events-none" />
+          <motion.div animate={{ x: [0,-30,0], y: [0,-20,0] }} transition={{ repeat: Infinity, duration: 18, ease: 'easeInOut', delay: 9 }} className="absolute -bottom-24 -left-24 w-[380px] h-[380px] rounded-full bg-[#1B263B]/70 blur-[80px] pointer-events-none" />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
@@ -683,8 +699,10 @@ export default function Home() {
         </section>
 
         {/* 6. Portfolio Section */}
-        <section id="work" className="py-24 bg-white dark:bg-[#0D1B2A]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section id="work" className="relative overflow-hidden py-24 bg-white dark:bg-[#0D1B2A]">
+          <motion.div animate={{ x: [0,-20,0], y: [0,-28,0] }} transition={{ repeat: Infinity, duration: 18, ease: 'easeInOut', delay: 2 }} className="absolute -top-48 -left-48 w-[520px] h-[520px] rounded-full bg-[#415A77]/5 dark:bg-[#415A77]/9 blur-[110px] pointer-events-none" />
+          <motion.div animate={{ x: [0,28,0], y: [0,20,0] }} transition={{ repeat: Infinity, duration: 24, ease: 'easeInOut', delay: 7 }} className="absolute -bottom-48 -right-48 w-[440px] h-[440px] rounded-full bg-[#778DA9]/4 dark:bg-[#778DA9]/7 blur-[120px] pointer-events-none" />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 max-w-6xl mx-auto">
               <div className="max-w-2xl">
                 <Badge variant="outline" className="mb-4 bg-[#F5F5F5] dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Selected Work</Badge>
@@ -714,7 +732,7 @@ export default function Home() {
                   whileHover={{ y: -8, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
                   className="group cursor-pointer break-inside-avoid"
                 >
-                  <Card className="overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-2xl hover:shadow-[#415A77]/10 transition-shadow duration-500 rounded-2xl flex flex-col">
+                  <Card className="card-glow overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-2xl hover:shadow-[#415A77]/10 transition-shadow duration-500 rounded-2xl flex flex-col">
                     <div className={`${project.height} w-full bg-gradient-to-br ${project.color} relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-700`}>
                       <div className="absolute inset-0 bg-[#0D1B2A]/5 mix-blend-overlay" />
                       <div className="absolute inset-4 md:inset-8 border border-white/20 rounded-xl overflow-hidden flex flex-col backdrop-blur-sm bg-white/5">
@@ -750,8 +768,10 @@ export default function Home() {
         <SocialCarousel onViewMore={() => scrollTo('work')} />
 
         {/* 7. Process Section */}
-        <section id="process" className="py-24 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section id="process" className="relative overflow-hidden py-24 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
+          <motion.div animate={{ x: [0,22,0], y: [0,-16,0] }} transition={{ repeat: Infinity, duration: 19, ease: 'easeInOut' }} className="absolute top-1/2 -translate-y-1/2 -right-48 w-[420px] h-[420px] rounded-full bg-[#415A77]/5 dark:bg-[#415A77]/8 blur-[100px] pointer-events-none" />
+          <motion.div animate={{ x: [0,-18,0], y: [0,22,0] }} transition={{ repeat: Infinity, duration: 23, ease: 'easeInOut', delay: 6 }} className="absolute top-1/2 -translate-y-1/2 -left-48 w-[360px] h-[360px] rounded-full bg-[#778DA9]/4 dark:bg-[#778DA9]/6 blur-[100px] pointer-events-none" />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-20">
               <Badge variant="outline" className="mb-4 bg-white dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Our Process</Badge>
               <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">How We Work</h2>
@@ -787,8 +807,11 @@ export default function Home() {
         </section>
 
         {/* 8. Pricing Section */}
-        <section id="pricing" className="py-24 bg-white dark:bg-[#1B263B] border-t border-[#E0E1DD] dark:border-white/10">
-          <div className="container mx-auto px-4 md:px-6">
+        <section id="pricing" className="relative overflow-hidden py-24 bg-white dark:bg-[#1B263B] border-t border-[#E0E1DD] dark:border-white/10">
+          <motion.div animate={{ scale: [1,1.12,1], opacity: [0.25,0.45,0.25] }} transition={{ repeat: Infinity, duration: 10, ease: 'easeInOut' }} className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[640px] h-[640px] rounded-full bg-[#415A77]/6 dark:bg-[#415A77]/12 blur-[130px] pointer-events-none" />
+          <motion.div animate={{ x: [0,-28,0], y: [0,18,0] }} transition={{ repeat: Infinity, duration: 15, ease: 'easeInOut', delay: 4 }} className="absolute -top-24 -right-24 w-[360px] h-[360px] rounded-full bg-[#778DA9]/5 dark:bg-[#778DA9]/9 blur-[100px] pointer-events-none" />
+          <motion.div animate={{ x: [0,22,0], y: [0,-16,0] }} transition={{ repeat: Infinity, duration: 18, ease: 'easeInOut', delay: 8 }} className="absolute -bottom-24 -left-24 w-[320px] h-[320px] rounded-full bg-[#415A77]/4 dark:bg-[#415A77]/8 blur-[100px] pointer-events-none" />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
             <div className="text-center max-w-3xl mx-auto mb-16">
               <Badge variant="outline" className="mb-4 bg-[#F5F5F5] dark:bg-[#0D1B2A] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Pricing</Badge>
               <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">Flexible Solutions For Growing Businesses</h2>
@@ -800,7 +823,7 @@ export default function Home() {
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
               {/* Starter */}
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}>
-                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300">
+                <Card className="card-glow h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300">
                   <CardContent className="p-8 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-[#0D1B2A] dark:text-white mb-2">Starter Website</h3>
                     <p className="text-sm text-[#778DA9] mb-6">Small businesses & personal brands</p>
@@ -823,7 +846,7 @@ export default function Home() {
 
               {/* Business — Popular */}
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} whileHover={{ y: -8, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}>
-                <Card className="h-full border-none bg-[#0D1B2A] dark:bg-[#415A77] shadow-2xl hover:shadow-[#415A77]/40 relative flex flex-col rounded-3xl transform md:-translate-y-4 transition-shadow duration-300">
+                <Card className="card-glow h-full border-none bg-[#0D1B2A] dark:bg-[#415A77] shadow-2xl hover:shadow-[#415A77]/40 relative flex flex-col rounded-3xl transform md:-translate-y-4 transition-shadow duration-300">
                   <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#415A77] dark:bg-white dark:text-[#0D1B2A] text-white hover:bg-[#415A77]">Most Popular</Badge>
                   <CardContent className="p-8 flex-1 flex flex-col text-white">
                     <h3 className="text-xl font-bold mb-2 mt-2">Business Website</h3>
@@ -847,7 +870,7 @@ export default function Home() {
 
               {/* E-Commerce */}
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}>
-                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300">
+                <Card className="card-glow h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300">
                   <CardContent className="p-8 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-[#0D1B2A] dark:text-white mb-2">E-Commerce</h3>
                     <p className="text-sm text-[#778DA9] mb-6">Online stores</p>

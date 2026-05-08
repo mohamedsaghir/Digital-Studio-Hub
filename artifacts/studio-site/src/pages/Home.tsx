@@ -709,20 +709,15 @@ export default function Home() {
           <motion.div animate={{ x: [0,-20,0], y: [0,-28,0] }} transition={{ repeat: Infinity, duration: 18, ease: 'easeInOut', delay: 2 }} className="absolute -top-48 -left-48 w-[520px] h-[520px] rounded-full bg-[#415A77]/5 dark:bg-[#415A77]/9 blur-[110px] pointer-events-none" />
           <motion.div animate={{ x: [0,28,0], y: [0,20,0] }} transition={{ repeat: Infinity, duration: 24, ease: 'easeInOut', delay: 7 }} className="absolute -bottom-48 -right-48 w-[440px] h-[440px] rounded-full bg-[#778DA9]/4 dark:bg-[#778DA9]/7 blur-[120px] pointer-events-none" />
           <div className="container mx-auto px-4 md:px-6 relative z-10">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 max-w-6xl mx-auto">
-              <div className="max-w-2xl">
-                <Badge variant="outline" className="mb-4 bg-[#F5F5F5] dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Selected Work</Badge>
-                <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">Recent Projects</h2>
-                <p className="text-lg text-[#778DA9]">
-                  A selection of modern website and branding concepts created for businesses.
-                </p>
-              </div>
-              <Button variant="outline" className="border-[#E0E1DD] dark:border-white/10 text-[#0D1B2A] dark:text-white hover:bg-[#F5F5F5] dark:hover:bg-white/8 w-full md:w-auto">
-                View All Projects <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+            <div className="mb-16 max-w-6xl mx-auto">
+              <Badge variant="outline" className="mb-4 bg-[#F5F5F5] dark:bg-[#1B263B] border-[#E0E1DD] dark:border-white/10 text-[#415A77] dark:text-[#778DA9]">Selected Work</Badge>
+              <h2 className="text-3xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white mb-4 tracking-tight">Recent Projects</h2>
+              <p className="text-lg text-[#778DA9]">
+                A selection of modern website and branding concepts created for businesses.
+              </p>
             </div>
 
-            <div className="columns-1 md:columns-2 gap-8 max-w-6xl mx-auto space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {[
                 {
                   title: 'The King Kam',
@@ -730,7 +725,7 @@ export default function Home() {
                   category: 'Website',
                   url: 'https://www.thekingkam.de/',
                   image: '/work-kingkam.png',
-                  height: 'h-72',
+                  height: 'h-56',
                   tag: 'Auto Detailing · Bad Pyrmont'
                 },
                 {
@@ -739,7 +734,7 @@ export default function Home() {
                   category: 'Web App',
                   url: 'https://iqraa.cloud/',
                   image: '/work-iqraa.png',
-                  height: 'h-96',
+                  height: 'h-56',
                   tag: 'E-Library · Arabic Platform'
                 },
                 {
@@ -748,7 +743,7 @@ export default function Home() {
                   category: 'Portfolio',
                   url: 'https://ahmadsaghir.de/',
                   image: '/work-ahmad.png',
-                  height: 'h-80',
+                  height: 'h-56',
                   tag: 'Portfolio · Web Developer'
                 },
               ].map((project, i) => (

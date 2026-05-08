@@ -164,48 +164,6 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
               Professional social media visuals crafted to capture attention, reflect brand identity, and drive engagement across platforms.
             </p>
 
-            {/* Slide info */}
-            <motion.p
-              key={active}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              className="text-xs font-semibold uppercase tracking-widest text-[#778DA9] mb-5"
-            >
-              {posts[active].label} — {posts[active].title}
-            </motion.p>
-
-            {/* Progress dots + arrows */}
-            <div className="flex items-center gap-4 mb-8">
-              <button
-                onClick={prev}
-                className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
-                aria-label="Previous"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-
-              <div className="flex items-center gap-1.5">
-                {posts.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActive(i)}
-                    aria-label={`Slide ${i + 1}`}
-                    className="rounded-full transition-all duration-300"
-                    style={{ width: i === active ? 22 : 6, height: 6, background: i === active ? '#0D1B2A' : '#E0E1DD' }}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={next}
-                className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
-                aria-label="Next"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-
             <Button
               onClick={onViewMore}
               variant="outline"
@@ -225,54 +183,100 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
             className="flex-1 flex items-center justify-center"
           >
             {/* Container sized to hold fan spread */}
-            <div
-              className="relative"
-              style={{ width: CARD_W * 3.2, height: CARD_H * 1.18 }}
-              onPointerDown={handlePointerDown}
-              onPointerUp={handlePointerUp}
-            >
-              {posts.map((post, index) => {
-                const rel = getRelPos(index);
-                const abs = Math.abs(rel);
-                if (abs > 2) return null;
+            <div className="flex flex-col items-center gap-6">
+              <div
+                className="relative"
+                style={{ width: CARD_W * 3.2, height: CARD_H * 1.18 }}
+                onPointerDown={handlePointerDown}
+                onPointerUp={handlePointerUp}
+              >
+                {posts.map((post, index) => {
+                  const rel = getRelPos(index);
+                  const abs = Math.abs(rel);
+                  if (abs > 2) return null;
 
-                const isActive = rel === 0;
+                  const isActive = rel === 0;
 
-                // Fan layout params
-                const xOffset = rel * (CARD_W * 0.72);
-                const rotate = rel * 6;
-                const scale = isActive ? 1 : abs === 1 ? 0.88 : 0.76;
-                const opacity = isActive ? 1 : abs === 1 ? 0.70 : 0.35;
-                const zIndex = 30 - abs * 10;
-                const yOffset = abs === 0 ? 0 : abs === 1 ? 16 : 30;
+                  const xOffset = rel * (CARD_W * 0.72);
+                  const rotate = rel * 6;
+                  const scale = isActive ? 1 : abs === 1 ? 0.88 : 0.76;
+                  const opacity = isActive ? 1 : abs === 1 ? 0.70 : 0.35;
+                  const zIndex = 30 - abs * 10;
+                  const yOffset = abs === 0 ? 0 : abs === 1 ? 16 : 30;
 
-                return (
-                  <motion.div
-                    key={post.id}
-                    animate={{ x: xOffset, y: yOffset, rotate, scale, opacity, zIndex }}
-                    transition={{ type: 'spring', stiffness: 280, damping: 32 }}
-                    onClick={() => { if (!dragging && rel !== 0) { rel < 0 ? prev() : next(); } }}
-                    className="absolute cursor-grab active:cursor-grabbing"
-                    style={{
-                      width: CARD_W,
-                      height: CARD_H,
-                      left: '50%',
-                      top: '50%',
-                      marginLeft: -CARD_W / 2,
-                      marginTop: -CARD_H / 2,
-                      borderRadius: 16,
-                      boxShadow: isActive
-                        ? '0 24px 56px rgba(13,27,42,0.24), 0 6px 16px rgba(13,27,42,0.14)'
-                        : '0 8px 24px rgba(13,27,42,0.10)',
-                    }}
+                  return (
+                    <motion.div
+                      key={post.id}
+                      animate={{ x: xOffset, y: yOffset, rotate, scale, opacity, zIndex }}
+                      transition={{ type: 'spring', stiffness: 280, damping: 32 }}
+                      onClick={() => { if (!dragging && rel !== 0) { rel < 0 ? prev() : next(); } }}
+                      className="absolute cursor-grab active:cursor-grabbing"
+                      style={{
+                        width: CARD_W,
+                        height: CARD_H,
+                        left: '50%',
+                        top: '50%',
+                        marginLeft: -CARD_W / 2,
+                        marginTop: -CARD_H / 2,
+                        borderRadius: 16,
+                        boxShadow: isActive
+                          ? '0 24px 56px rgba(13,27,42,0.24), 0 6px 16px rgba(13,27,42,0.14)'
+                          : '0 8px 24px rgba(13,27,42,0.10)',
+                      }}
+                    >
+                      <PostCard post={post} />
+                      {!isActive && (
+                        <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{ background: 'rgba(245,245,245,0.25)' }} />
+                      )}
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Controls — below the slider */}
+              <div className="flex flex-col items-center gap-3">
+                {/* Slide label */}
+                <motion.p
+                  key={active}
+                  initial={{ opacity: 0, y: 4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="text-xs font-semibold uppercase tracking-widest text-[#778DA9]"
+                >
+                  {posts[active].label} — {posts[active].title}
+                </motion.p>
+
+                {/* Arrows + dots */}
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={prev}
+                    className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
+                    aria-label="Previous"
                   >
-                    <PostCard post={post} />
-                    {!isActive && (
-                      <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{ background: 'rgba(245,245,245,0.25)' }} />
-                    )}
-                  </motion.div>
-                );
-              })}
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    {posts.map((_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setActive(i)}
+                        aria-label={`Slide ${i + 1}`}
+                        className="rounded-full transition-all duration-300"
+                        style={{ width: i === active ? 22 : 6, height: 6, background: i === active ? '#0D1B2A' : '#E0E1DD' }}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    onClick={next}
+                    className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
+                    aria-label="Next"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
 

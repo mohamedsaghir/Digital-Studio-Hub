@@ -307,55 +307,61 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col select-none">
+                  {/* Mockup navbar */}
                   <div className="h-9 bg-[#0D1B2A] flex items-center px-5 gap-4">
-                    <div className="w-16 h-2.5 bg-white/30 rounded-full" />
-                    <div className="flex gap-3 ml-auto">
-                      <div className="w-8 h-1.5 bg-white/20 rounded-full" />
-                      <div className="w-8 h-1.5 bg-white/20 rounded-full" />
-                      <div className="w-8 h-1.5 bg-white/20 rounded-full" />
+                    <span className="text-white font-bold text-[10px] tracking-widest uppercase">Bella Roma</span>
+                    <div className="flex gap-4 ml-auto">
+                      <span className="text-white/50 text-[8px] font-medium">Menu</span>
+                      <span className="text-white/50 text-[8px] font-medium">About</span>
+                      <span className="text-white/50 text-[8px] font-medium">Gallery</span>
                     </div>
-                    <div className="w-14 h-5 bg-[#415A77] rounded flex items-center justify-center">
-                      <div className="w-8 h-1.5 bg-white/80 rounded-full" />
-                    </div>
+                    <div className="px-3 h-5 bg-[#415A77] rounded text-white text-[8px] font-semibold flex items-center">Reserve</div>
                   </div>
 
+                  {/* Mockup hero */}
                   <div className="bg-gradient-to-br from-[#1B263B] via-[#415A77] to-[#778DA9] px-6 md:px-10 py-7 flex items-center gap-8">
-                    <div className="flex-1 space-y-2.5">
-                      <div className="w-24 h-3 bg-[#778DA9]/50 rounded-full" />
-                      <div className="w-4/5 h-5 bg-white/80 rounded-md" />
-                      <div className="w-3/5 h-5 bg-white/50 rounded-md" />
-                      <div className="space-y-1.5 pt-1">
-                        <div className="w-full h-2 bg-white/15 rounded-full" />
-                        <div className="w-5/6 h-2 bg-white/15 rounded-full" />
-                      </div>
+                    <div className="flex-1 space-y-2">
+                      <span className="inline-block text-[8px] font-semibold text-[#778DA9] uppercase tracking-widest">⭐ Munich's #1 Italian Restaurant</span>
+                      <p className="text-white font-bold text-sm md:text-base leading-tight">Where Every Dish<br/>Tells a Story</p>
+                      <p className="text-white/60 text-[9px] leading-relaxed">Authentic Italian cuisine crafted from<br/>generations of passion and heritage.</p>
                       <div className="flex gap-2.5 pt-2">
-                        <div className="w-20 h-7 bg-white rounded-md" />
-                        <div className="w-20 h-7 border border-white/40 rounded-md" />
+                        <div className="px-3 h-7 bg-white rounded-md text-[#0D1B2A] text-[8px] font-bold flex items-center">Reserve a Table</div>
+                        <div className="px-3 h-7 border border-white/40 rounded-md text-white text-[8px] font-medium flex items-center">View Menu</div>
                       </div>
                     </div>
-                    <div className="hidden sm:block w-32 md:w-44 h-24 md:h-32 bg-white/10 rounded-xl border border-white/20 flex-shrink-0 relative overflow-hidden">
+                    <div className="hidden sm:flex w-32 md:w-44 h-24 md:h-32 bg-white/10 rounded-xl border border-white/20 flex-shrink-0 relative overflow-hidden items-end">
                       <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-                      <div className="absolute bottom-3 left-3 right-3 space-y-1.5">
-                        <div className="w-3/4 h-2 bg-white/30 rounded-full" />
-                        <div className="w-1/2 h-2 bg-white/20 rounded-full" />
+                      <div className="w-full p-3 space-y-1 bg-black/30 backdrop-blur-sm">
+                        <p className="text-white font-bold text-[9px]">Osso Buco Milanese</p>
+                        <p className="text-white/60 text-[8px]">Chef's signature — €28</p>
                       </div>
                     </div>
                   </div>
 
+                  {/* Mockup content section */}
                   <div className="bg-[#F5F5F5] dark:bg-[#0D1B2A] px-6 md:px-10 py-5 grid grid-cols-3 gap-4">
-                    <div className="col-span-2 space-y-3">
-                      <div className="w-1/3 h-3 bg-[#0D1B2A]/25 dark:bg-white/20 rounded-full" />
-                      <div className="w-full h-2 bg-[#E0E1DD] dark:bg-white/10 rounded-full" />
-                      <div className="w-5/6 h-2 bg-[#E0E1DD] dark:bg-white/10 rounded-full" />
-                      <div className="w-4/6 h-2 bg-[#E0E1DD] dark:bg-white/10 rounded-full" />
+                    <div className="col-span-2 space-y-2">
+                      <p className="text-[9px] font-bold text-[#0D1B2A] dark:text-white uppercase tracking-wider">Why Guests Love Us</p>
+                      <p className="text-[8px] text-[#415A77] dark:text-[#778DA9] leading-relaxed">From our wood-fired pizzas to hand-rolled pasta — every bite is made from scratch using imported Italian ingredients. No shortcuts. Ever.</p>
                       <div className="flex gap-3 pt-1">
-                        <div className="h-14 flex-1 bg-white dark:bg-[#1B263B] rounded-xl border border-[#E0E1DD] dark:border-white/10" />
-                        <div className="h-14 flex-1 bg-white dark:bg-[#1B263B] rounded-xl border border-[#E0E1DD] dark:border-white/10" />
+                        <div className="h-14 flex-1 bg-white dark:bg-[#1B263B] rounded-xl border border-[#E0E1DD] dark:border-white/10 flex flex-col items-center justify-center gap-0.5">
+                          <span className="text-[11px] font-bold text-[#0D1B2A] dark:text-white">12+</span>
+                          <span className="text-[7px] text-[#778DA9]">Years of Excellence</span>
+                        </div>
+                        <div className="h-14 flex-1 bg-white dark:bg-[#1B263B] rounded-xl border border-[#E0E1DD] dark:border-white/10 flex flex-col items-center justify-center gap-0.5">
+                          <span className="text-[11px] font-bold text-[#0D1B2A] dark:text-white">4.9★</span>
+                          <span className="text-[7px] text-[#778DA9]">Google Rating</span>
+                        </div>
                       </div>
                     </div>
-                    <div className="space-y-3">
-                      <div className="h-20 rounded-xl bg-gradient-to-br from-[#415A77]/20 to-[#778DA9]/10 border border-[#E0E1DD] dark:border-white/10" />
-                      <div className="h-6 w-full bg-[#0D1B2A] dark:bg-[#415A77] rounded-lg" />
+                    <div className="space-y-2">
+                      <div className="h-20 rounded-xl bg-gradient-to-br from-[#415A77]/20 to-[#778DA9]/10 border border-[#E0E1DD] dark:border-white/10 flex flex-col items-center justify-center gap-1 px-2 text-center">
+                        <span className="text-[9px] font-bold text-[#0D1B2A] dark:text-white">Book a Table</span>
+                        <span className="text-[7px] text-[#778DA9]">Open Mon–Sun · 12–23h</span>
+                      </div>
+                      <div className="h-6 w-full bg-[#0D1B2A] dark:bg-[#415A77] rounded-lg flex items-center justify-center">
+                        <span className="text-white text-[8px] font-semibold">Reserve Now →</span>
+                      </div>
                     </div>
                   </div>
                 </div>

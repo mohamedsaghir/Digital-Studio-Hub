@@ -758,11 +758,11 @@ export default function Home() {
                 >
                   <a href={project.url} target="_blank" rel="noopener noreferrer" className="block">
                     <Card className="card-glow overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-2xl hover:shadow-[#415A77]/10 transition-shadow duration-500 rounded-2xl flex flex-col">
-                      <div className={`${project.height} w-full relative overflow-hidden`}>
+                      <div className="w-full aspect-[16/7] relative overflow-hidden">
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.04] transition-transform duration-700"
+                          className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

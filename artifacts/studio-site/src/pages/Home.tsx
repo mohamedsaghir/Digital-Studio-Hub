@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useReducedMotion, useInView } from 'framer-motion';
 import {
   Menu, X, ArrowRight, CheckCircle2, Check, ExternalLink,
   Shield, TrendingUp, Smartphone, MessageSquare,
@@ -14,6 +14,30 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+
+function AnimatedCounter({ to, suffix = '', prefix = '' }: { to: number; suffix?: string; prefix?: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true });
+  const prefersReducedMotion = useReducedMotion();
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!inView) return;
+    if (prefersReducedMotion) { setCount(to); return; }
+    const duration = 1600;
+    const startTime = performance.now();
+    const raf = (now: number) => {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * to));
+      if (progress < 1) requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }, [inView, to, prefersReducedMotion]);
+
+  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+}
 
 function NewsletterForm() {
   const [email, setEmail] = useState('');
@@ -235,12 +259,16 @@ export default function Home() {
                   We create modern websites and professional social media content that help businesses look trustworthy, attract more customers, and grow online.
                 </p>
                 <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
-                  <Button onClick={() => scrollTo('work')} variant="outline" size="lg" className="border-[#778DA9]/30 dark:border-white/20 text-[#0D1B2A] dark:text-white hover:bg-[#E0E1DD] dark:hover:bg-white/10 font-medium h-12 px-8">
-                    View Work
-                  </Button>
-                  <Button onClick={() => scrollTo('contact')} size="lg" className="bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] font-medium h-12 px-8">
-                    Start a Project <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.18 }}>
+                    <Button onClick={() => scrollTo('work')} variant="outline" size="lg" className="border-[#778DA9]/30 dark:border-white/20 text-[#0D1B2A] dark:text-white hover:bg-[#E0E1DD] dark:hover:bg-white/10 font-medium h-12 px-8">
+                      View Work
+                    </Button>
+                  </motion.div>
+                  <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }} transition={{ duration: 0.18 }}>
+                    <Button onClick={() => scrollTo('contact')} size="lg" className="bg-[#0D1B2A] dark:bg-[#415A77] text-[#F5F5F5] hover:bg-[#1B263B] dark:hover:bg-[#778DA9] font-medium h-12 px-8 shadow-lg shadow-[#0D1B2A]/20 dark:shadow-[#415A77]/30">
+                      Start a Project <motion.span animate={{ x: [0, 3, 0] }} transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }} className="ml-2 inline-block"><ArrowRight className="h-4 w-4" /></motion.span>
+                    </Button>
+                  </motion.div>
                 </div>
                 <div className="flex flex-wrap justify-center items-center gap-3 text-sm text-[#778DA9] font-medium">
                   <span className="flex items-center"><CheckCircle2 className="h-4 w-4 text-[#415A77] mr-1" /> Based in Germany</span>
@@ -422,10 +450,22 @@ export default function Home() {
         {/* 3. Trust Bar */}
         <section className="py-12 bg-white dark:bg-[#1B263B] border-y border-[#E0E1DD] dark:border-white/10">
           <div className="container mx-auto px-4 md:px-6">
-            <p className="text-center text-sm font-semibold text-[#778DA9] uppercase tracking-wider mb-8">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="text-center text-sm font-semibold text-[#778DA9] uppercase tracking-wider mb-8"
+            >
               Trusted by businesses across Germany
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
+            </motion.p>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={{ visible: { transition: { staggerChildren: 0.07 } } }}
+              className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70"
+            >
               {[
                 { Icon: Utensils, label: 'Restaurant' },
                 { Icon: Scissors, label: 'Barber & Salon' },
@@ -434,12 +474,49 @@ export default function Home() {
                 { Icon: MapPin, label: 'Local Services' },
                 { Icon: Building, label: 'Real Estate' },
               ].map(({ Icon, label }) => (
-                <div key={label} className="flex flex-col items-center gap-2 group hover:opacity-100 transition-opacity">
+                <motion.div
+                  key={label}
+                  variants={{ hidden: { opacity: 0, y: 12 }, visible: { opacity: 1, y: 0, transition: { duration: 0.4 } } }}
+                  whileHover={{ scale: 1.1, opacity: 1 }}
+                  className="flex flex-col items-center gap-2 group cursor-default transition-opacity"
+                >
                   <Icon className="h-8 w-8 text-[#415A77]" />
                   <span className="text-xs font-medium text-[#1B263B] dark:text-[#E0E1DD]">{label}</span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* 3b. Stats Bar */}
+        <section className="py-16 bg-[#F5F5F5] dark:bg-[#0D1B2A]">
+          <div className="container mx-auto px-4 md:px-6">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-60px' }}
+              variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+              className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+            >
+              {[
+                { to: 50, suffix: '+', label: 'Happy Clients' },
+                { to: 98, suffix: '%', label: 'Satisfaction Rate' },
+                { to: 2, suffix: ' wks', label: 'Avg Delivery' },
+                { to: 3, suffix: '×', label: 'Avg Traffic Growth' },
+              ].map((stat) => (
+                <motion.div
+                  key={stat.label}
+                  variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] } } }}
+                  className="text-center"
+                >
+                  <div className="text-4xl md:text-5xl font-bold text-[#0D1B2A] dark:text-white tracking-tight mb-1">
+                    <AnimatedCounter to={stat.to} suffix={stat.suffix} />
+                  </div>
+                  <div className="w-8 h-0.5 bg-[#415A77]/40 rounded-full mx-auto my-2" />
+                  <p className="text-sm text-[#778DA9] font-medium">{stat.label}</p>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
         </section>
 
@@ -460,7 +537,8 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full"
+                whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
+                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm hover:shadow-xl dark:hover:shadow-[#415A77]/10 border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full transition-shadow duration-300"
               >
                 <div className="h-64 bg-gradient-to-br from-[#1B263B] to-[#415A77] p-6 relative overflow-hidden flex items-end justify-center">
                   <div className="w-[80%] h-[90%] bg-white dark:bg-[#0D1B2A] rounded-t-xl shadow-lg border border-white/10 flex flex-col overflow-hidden">
@@ -509,7 +587,8 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ delay: 0.1 }}
-                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full"
+                whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
+                className="rounded-3xl overflow-hidden bg-white dark:bg-[#1B263B] shadow-sm hover:shadow-xl dark:hover:shadow-[#415A77]/10 border border-[#E0E1DD] dark:border-white/10 flex flex-col h-full transition-shadow duration-300"
               >
                 <div className="h-64 bg-gradient-to-br from-[#415A77] to-[#778DA9] p-6 relative overflow-hidden flex items-center justify-center">
                   <div className="grid grid-cols-3 gap-2 w-[70%]">
@@ -615,11 +694,16 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="flex flex-col"
+                    whileHover={{ y: -5, transition: { duration: 0.25 } }}
+                    className="flex flex-col p-6 rounded-2xl border border-white/5 hover:border-white/10 hover:bg-white/4 transition-colors duration-300 cursor-default"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-[#1B263B] border border-white/10 flex items-center justify-center text-[#778DA9] mb-4">
+                    <motion.div
+                      whileHover={{ scale: 1.1, rotate: 3 }}
+                      transition={{ duration: 0.2 }}
+                      className="w-12 h-12 rounded-xl bg-[#1B263B] border border-white/10 flex items-center justify-center text-[#778DA9] mb-4"
+                    >
                       <item.icon className="h-6 w-6" />
-                    </div>
+                    </motion.div>
                     <h3 className="text-xl font-bold text-white mb-2">{item.title}</h3>
                     <p className="text-[#778DA9] text-sm leading-relaxed">{item.desc}</p>
                   </motion.div>
@@ -658,10 +742,11 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ delay: (i % 2) * 0.2 }}
+                  whileHover={{ y: -8, transition: { duration: 0.3, ease: [0.22, 1, 0.36, 1] } }}
                   className="group cursor-pointer break-inside-avoid"
                 >
-                  <Card className="overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-xl transition-all duration-500 rounded-2xl flex flex-col">
-                    <div className={`${project.height} w-full bg-gradient-to-br ${project.color} relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-700`}>
+                  <Card className="overflow-hidden border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#1B263B] hover:shadow-2xl hover:shadow-[#415A77]/10 transition-shadow duration-500 rounded-2xl flex flex-col">
+                    <div className={`${project.height} w-full bg-gradient-to-br ${project.color} relative overflow-hidden group-hover:scale-[1.03] transition-transform duration-700`}>
                       <div className="absolute inset-0 bg-[#0D1B2A]/5 mix-blend-overlay" />
                       <div className="absolute inset-4 md:inset-8 border border-white/20 rounded-xl overflow-hidden flex flex-col backdrop-blur-sm bg-white/5">
                         <div className="h-8 border-b border-white/20 flex items-center px-4">
@@ -745,8 +830,8 @@ export default function Home() {
 
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto items-center">
               {/* Starter */}
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }}>
-                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.1 }} whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}>
+                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300">
                   <CardContent className="p-8 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-[#0D1B2A] dark:text-white mb-2">Starter Website</h3>
                     <p className="text-sm text-[#778DA9] mb-6">Small businesses & personal brands</p>
@@ -768,8 +853,8 @@ export default function Home() {
               </motion.div>
 
               {/* Business — Popular */}
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }}>
-                <Card className="h-full border-none bg-[#0D1B2A] dark:bg-[#415A77] shadow-2xl relative flex flex-col rounded-3xl transform md:-translate-y-4">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.2 }} whileHover={{ y: -8, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}>
+                <Card className="h-full border-none bg-[#0D1B2A] dark:bg-[#415A77] shadow-2xl hover:shadow-[#415A77]/40 relative flex flex-col rounded-3xl transform md:-translate-y-4 transition-shadow duration-300">
                   <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#415A77] dark:bg-white dark:text-[#0D1B2A] text-white hover:bg-[#415A77]">Most Popular</Badge>
                   <CardContent className="p-8 flex-1 flex flex-col text-white">
                     <h3 className="text-xl font-bold mb-2 mt-2">Business Website</h3>
@@ -792,8 +877,8 @@ export default function Home() {
               </motion.div>
 
               {/* E-Commerce */}
-              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }}>
-                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm">
+              <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 }} whileHover={{ y: -6, transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}>
+                <Card className="h-full border border-[#E0E1DD] dark:border-white/10 bg-white dark:bg-[#0D1B2A] flex flex-col rounded-3xl shadow-sm hover:shadow-xl transition-shadow duration-300">
                   <CardContent className="p-8 flex-1 flex flex-col">
                     <h3 className="text-xl font-bold text-[#0D1B2A] dark:text-white mb-2">E-Commerce</h3>
                     <p className="text-sm text-[#778DA9] mb-6">Online stores</p>
@@ -818,21 +903,63 @@ export default function Home() {
         </section>
 
         {/* 9. Final CTA */}
-        <section id="contact" className="py-24 bg-[#1B263B]">
-          <div className="container mx-auto px-4 md:px-6">
+        <section id="contact" className="py-24 bg-[#1B263B] relative overflow-hidden">
+          {/* Decorative background orbs */}
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], opacity: [0.15, 0.25, 0.15] }}
+            transition={{ repeat: Infinity, duration: 7, ease: 'easeInOut' }}
+            className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#415A77] blur-[100px] pointer-events-none"
+          />
+          <motion.div
+            animate={{ scale: [1, 1.2, 1], opacity: [0.1, 0.2, 0.1] }}
+            transition={{ repeat: Infinity, duration: 9, ease: 'easeInOut', delay: 2 }}
+            className="absolute -bottom-32 -right-32 w-[28rem] h-[28rem] rounded-full bg-[#778DA9] blur-[120px] pointer-events-none"
+          />
+          <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="max-w-4xl mx-auto text-center"
             >
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to upgrade your business online?</h2>
-              <p className="text-xl text-[#778DA9] mb-10 max-w-2xl mx-auto">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">Ready to upgrade your business online?</h2>
+              </motion.div>
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-xl text-[#778DA9] mb-10 max-w-2xl mx-auto"
+              >
                 Let's discuss how we can help you build a professional digital presence that attracts more customers.
-              </p>
-              <Button size="lg" className="bg-white text-[#0D1B2A] hover:bg-[#F5F5F5] h-14 px-8 text-lg rounded-xl">
-                Contact Us Today <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              </motion.p>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-block"
+              >
+                <Button size="lg" className="bg-white text-[#0D1B2A] hover:bg-[#F5F5F5] h-14 px-10 text-lg rounded-xl shadow-2xl shadow-black/30 font-semibold group">
+                  Contact Us Today
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
+                    className="ml-2 inline-block"
+                  >
+                    <ArrowRight className="h-5 w-5" />
+                  </motion.span>
+                </Button>
+              </motion.div>
             </motion.div>
           </div>
         </section>

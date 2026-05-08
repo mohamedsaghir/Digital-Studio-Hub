@@ -164,6 +164,48 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
               Professional social media visuals crafted to capture attention, reflect brand identity, and drive engagement across platforms.
             </p>
 
+            {/* Slide info */}
+            <motion.p
+              key={active}
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.2 }}
+              className="text-xs font-semibold uppercase tracking-widest text-[#778DA9] mb-5"
+            >
+              {posts[active].label} — {posts[active].title}
+            </motion.p>
+
+            {/* Progress dots + arrows */}
+            <div className="flex items-center gap-4 mb-8">
+              <button
+                onClick={prev}
+                className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+
+              <div className="flex items-center gap-1.5">
+                {posts.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActive(i)}
+                    aria-label={`Slide ${i + 1}`}
+                    className="rounded-full transition-all duration-300"
+                    style={{ width: i === active ? 22 : 6, height: 6, background: i === active ? '#0D1B2A' : '#E0E1DD' }}
+                  />
+                ))}
+              </div>
+
+              <button
+                onClick={next}
+                className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-[#F5F5F5] text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
+                aria-label="Next"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+
             <Button
               onClick={onViewMore}
               variant="outline"
@@ -231,47 +273,6 @@ export default function SocialCarousel({ onViewMore }: { onViewMore?: () => void
                   </motion.div>
                 );
               })}
-            </div>
-            {/* Slide label */}
-            <motion.p
-              key={active}
-              initial={{ opacity: 0, y: 4 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.2 }}
-              className="text-xs font-semibold uppercase tracking-widest text-[#778DA9] text-center mt-6 mb-4"
-            >
-              {posts[active].label} — {posts[active].title}
-            </motion.p>
-
-            {/* Prev / dots / next — centred under the fan */}
-            <div className="flex items-center justify-center gap-4">
-              <button
-                onClick={prev}
-                className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-white text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
-                aria-label="Previous"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-
-              <div className="flex items-center gap-1.5">
-                {posts.map((_, i) => (
-                  <button
-                    key={i}
-                    onClick={() => setActive(i)}
-                    aria-label={`Slide ${i + 1}`}
-                    className="rounded-full transition-all duration-300"
-                    style={{ width: i === active ? 22 : 6, height: 6, background: i === active ? '#0D1B2A' : '#E0E1DD' }}
-                  />
-                ))}
-              </div>
-
-              <button
-                onClick={next}
-                className="w-10 h-10 rounded-full border border-[#E0E1DD] bg-white text-[#415A77] flex items-center justify-center hover:bg-[#0D1B2A] hover:text-white hover:border-[#0D1B2A] transition-all duration-200 shadow-sm"
-                aria-label="Next"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
             </div>
           </motion.div>
 

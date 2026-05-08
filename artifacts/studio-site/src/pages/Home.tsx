@@ -724,7 +724,7 @@ export default function Home() {
                   desc: 'High-impact car detailing website with bold visual identity, WhatsApp booking integration, and a strong German-market presence.',
                   category: 'Website',
                   url: 'https://www.thekingkam.de/',
-                  image: '/work-ahmad.png',
+                  image: '/work-kingkam.png',
                   height: 'h-56',
                   tag: 'Auto Detailing · Bad Pyrmont'
                 },
@@ -742,7 +742,7 @@ export default function Home() {
                   desc: 'Sleek developer portfolio showcasing skills, projects, and client reviews — built for maximum credibility and conversion.',
                   category: 'Portfolio',
                   url: 'https://ahmadsaghir.de/',
-                  image: '/work-kingkam.png',
+                  image: '/work-ahmad.png',
                   height: 'h-56',
                   tag: 'Portfolio · Web Developer'
                 },
@@ -762,7 +762,7 @@ export default function Home() {
                         <img
                           src={project.image}
                           alt={project.title}
-                          className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-[1.04] transition-transform duration-700"
+                          className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-700"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B2A]/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
